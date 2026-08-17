@@ -1,0 +1,37 @@
+# Build output
+dist/
+*.tsbuildinfo
+
+# Dependencies
+node_modules/
+__pycache__/
+*.egg-info/
+.venv/
+venv/
+
+# Agent and editor tooling — never committed
+.claude/
+.codex/
+.cursor/
+.vscode/
+.idea/
+launch.json
+
+# Local secrets and environment
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.pfx
+*.key
+*.crt
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local scratch. Evidence under evidence/ IS committed on purpose — the assurance history is
+# the point — but ad-hoc local runs are not.
+scratch/
+evidence/local/

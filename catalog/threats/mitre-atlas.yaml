@@ -1,0 +1,33 @@
+framework: MITRE ATLAS
+# Names transcribed from the MISP galaxy ATLAS mirror, which is machine-readable and
+# redistributable. atlas.mitre.org itself does not serve a fetchable technique index.
+#
+# This mirror may lag upstream: it carries 91 entries where ATLAS v5.4.0 (Feb 2026) is reported
+# to hold 84 techniques plus sub-techniques and agent-specific additions. Treat the IDs here as
+# correct and the currency as unverified — a technique added upstream in 2026 may be absent.
+source: https://github.com/MISP/misp-galaxy/blob/main/clusters/mitre-atlas-attack-pattern.json
+canonical: https://atlas.mitre.org/
+retrieved: 2026-08-10
+version_claimed: null
+
+techniques:
+  - id: AML.T0010
+    name: ML Supply Chain Compromise
+  - id: AML.T0029
+    name: Denial of ML Service
+  - id: AML.T0034
+    name: Cost Harvesting
+  - id: AML.T0051
+    name: LLM Prompt Injection
+  - id: AML.T0051.000
+    name: Direct
+  - id: AML.T0051.001
+    name: Indirect
+  - id: AML.T0053
+    name: LLM Plugin Compromise
+  - id: AML.T0054
+    name: LLM Jailbreak
+  - id: AML.T0056
+    name: LLM Meta Prompt Extraction
+  - id: AML.T0057
+    name: LLM Data Leakage

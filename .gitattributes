@@ -1,0 +1,8 @@
+# Evidence is meant to be diffable and byte-reproducible across machines. Line-ending churn
+# between a Windows dev box and a Linux CI runner would show up as a change in assurance
+# posture when nothing about the posture changed, so normalise everything.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.ico binary

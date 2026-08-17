@@ -1,0 +1,22 @@
+# Sanctioned AI components for this repository.
+#
+# Anything `discover` finds that is not on this list is reported as UNDECLARED — the same
+# question PP-C008 asks about tools, asked about models, SDKs and MCP servers.
+#
+# An empty list means nothing is sanctioned yet and everything is flagged. That is the correct
+# starting position for a first scan, not a misconfiguration.
+
+# Serving model for the live adapter in target/src/model/anthropic.ts, and the default the
+# operator's autonomous triage runs against. Pinned, per PP-C006.
+claude-sonnet-5
+
+# Fallback identifier referenced in configuration for the same adapter.
+proofplane-mock-0.1.0
+
+# Client library for the above. Used by target/src/model/anthropic.ts and by the operator's
+# triage path, which drafts remediation proposals into a human-gated queue.
+@anthropic-ai/sdk
+
+# Model Context Protocol server SDK. operator/ exposes the assurance programme to an agent over
+# stdio. The surface is read and propose only — see docs/decisions/0006.
+@modelcontextprotocol/sdk

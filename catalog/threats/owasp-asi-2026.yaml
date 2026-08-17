@@ -1,0 +1,39 @@
+framework: OWASP Top 10 for Agentic Applications
+version_claimed: "2026"
+canonical: https://genai.owasp.org/
+retrieved: 2026-08-10
+
+# Names transcribed from secondary documentation, not from the OWASP primary PDF. Two sources
+# consulted agreed on all ten identifiers and differed on the exact wording of three titles
+# (ASI03, ASI04, ASI08 — "Agent Identity…" vs "Identity…", "…Compromise" vs "…Vulnerabilities",
+# "Cascading Agent Failures" vs "Cascading Failures"). The more specific wording is used here.
+# The identifiers are what the crosswalk depends on and those are not in dispute.
+#
+# This file exists because three of these were mapped incorrectly in the first version of this
+# catalog — ASI04 was recorded as "Sensitive Information Disclosure", ASI09 as "Insufficient
+# Observability", and PP-C006 pointed at ASI10 instead of ASI04. Every one of those was a
+# plausible-sounding guess. Making the threat catalog data, and validating control files
+# against it, turns that class of error into a failing test instead of a confident footnote.
+source_note: transcribed from secondary sources; not verified against the OWASP primary document
+
+techniques:
+  - id: ASI01
+    name: Agent Goal Hijack
+  - id: ASI02
+    name: Tool Misuse & Exploitation
+  - id: ASI03
+    name: Agent Identity & Privilege Abuse
+  - id: ASI04
+    name: Agentic Supply Chain Compromise
+  - id: ASI05
+    name: Unexpected Code Execution
+  - id: ASI06
+    name: Memory & Context Poisoning
+  - id: ASI07
+    name: Insecure Inter-Agent Communication
+  - id: ASI08
+    name: Cascading Agent Failures
+  - id: ASI09
+    name: Human-Agent Trust Exploitation
+  - id: ASI10
+    name: Rogue Agents

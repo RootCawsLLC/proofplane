@@ -1,0 +1,17 @@
+[project]
+name = "proofplane-probe"
+version = "0.1.0"
+description = "Threat-informed adversarial probes that prove AI governance controls by executing attacks against them."
+requires-python = ">=3.11"
+license = { text = "AGPL-3.0-or-later" }
+dependencies = ["PyYAML>=6.0"]
+
+[project.scripts]
+proofplane-probe = "proofplane_probe.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["proofplane_probe*"]

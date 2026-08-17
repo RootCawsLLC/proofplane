@@ -1,0 +1,31 @@
+{
+  "name": "@proofplane/operator",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MCP server exposing the assurance programme to an agent, with a structural boundary between what a model may judge and what only deterministic code may decide.",
+  "license": "AGPL-3.0-or-later",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "proofplane-operator": "dist/cli.js",
+    "proofplane-operator-mcp": "dist/mcp/server.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "mcp": "node dist/mcp/server.js",
+    "pretest": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0"
+  },
+  "devDependencies": {
+    "@anthropic-ai/sdk": "^0.116.0",
+    "@types/node": "^26.2.0",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
+}

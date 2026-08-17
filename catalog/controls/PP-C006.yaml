@@ -1,0 +1,80 @@
+id: PP-C006
+title: The serving model is pinned and matches a published AI bill of materials
+guardrail: G6
+
+statement: >
+  The system declares the model it serves in a machine-readable AI bill of materials, pins it
+  to an immutable version identifier rather than a moving alias, and refuses to start if the
+  model actually loaded does not match the declaration.
+
+rationale: >
+  Every downstream assurance claim is scoped to a specific model. A probe result that says
+  "injection was refused" means nothing if the model that refused it was silently replaced
+  the following week. Pinning converts the model from an ambient property of the environment
+  into a declared, versioned, diffable component — which is the precondition for saying that
+  yesterday's evidence still applies today.
+
+threat:
+  atlas:
+    - id: AML.T0010
+      name: ML Supply Chain Compromise
+      confidence: medium
+  owasp_asi:
+    - id: ASI04
+      name: Agentic Supply Chain Compromise
+      confidence: high
+
+proved_by: [PP-P006]
+
+assertion:
+  type: executed_probe
+  passes_when: >
+    An AI bill of materials is served, it declares exactly one serving model, that identifier
+    is pinned rather than a moving alias, and it equals the model the runtime reports.
+  fails_when: >
+    No bill of materials is served, the declared identifier is an alias, or it disagrees with
+    the runtime.
+
+crosswalk:
+  - framework: ISO/IEC 42001:2023
+    reference: A.4
+    reference_kind: annex_a_group
+    label: Resources for AI systems
+    confidence: medium
+    basis: >
+      Annex A group level only. A.4 concerns documenting the resources — including models —
+      that an AI system depends on.
+  - framework: ISO/IEC 42001:2023
+    reference: A.10
+    reference_kind: annex_a_group
+    label: Third-party and customer relationships
+    confidence: low
+    basis: Relevant where the model is a third-party service. Group level only.
+  - framework: NIST AI RMF 1.0
+    reference: MAP-4.1
+    reference_kind: subcategory
+    confidence: low
+    basis: Mapping of third-party components and their risks. Approximate anchor.
+  - framework: AIUC-1
+    reference: Reliability
+    reference_kind: domain
+    confidence: medium
+    basis: Domain level only.
+  - framework: EU AI Act
+    reference: Article 11 / Annex IV
+    reference_kind: article
+    label: Technical documentation
+    confidence: medium
+    basis: >
+      Annex IV requires a description of the system's elements and development process. An
+      AIBOM is one way to hold part of that description in machine-readable form; it does not
+      by itself constitute Annex IV documentation.
+  - framework: UK AI Cyber Security Code of Practice
+    reference: Secure supply chain / asset documentation
+    reference_kind: principle_name
+    confidence: low
+    basis: Cited by theme. Principle numbering not verified.
+
+references:
+  - https://cyclonedx.org/capabilities/mlbom/
+  - https://atlas.mitre.org/techniques/AML.T0010

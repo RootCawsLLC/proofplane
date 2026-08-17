@@ -1,0 +1,143 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:51baca07-9ff8-57f2-99a0-2b2703523a9c",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "type": "application",
+      "bom-ref": "proofplane",
+      "name": "proofplane",
+      "description": "AI surface discovered by static scan of the source tree."
+    },
+    "properties": [
+      {
+        "name": "proofplane:files-scanned",
+        "value": "155"
+      },
+      {
+        "name": "proofplane:files-skipped",
+        "value": "0"
+      },
+      {
+        "name": "proofplane:components",
+        "value": "3"
+      },
+      {
+        "name": "proofplane:undeclared",
+        "value": "0"
+      },
+      {
+        "name": "proofplane:provider-credentials-referenced",
+        "value": "ANTHROPIC_API_KEY"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "service",
+      "bom-ref": "mcp-server/@modelcontextprotocol/sdk",
+      "name": "@modelcontextprotocol/sdk",
+      "description": "\"@modelcontextprotocol/sdk\": \"^1.30.0\"",
+      "properties": [
+        {
+          "name": "proofplane:kind",
+          "value": "mcp-server"
+        },
+        {
+          "name": "proofplane:occurrences",
+          "value": "2"
+        },
+        {
+          "name": "proofplane:rule",
+          "value": "AID-020"
+        },
+        {
+          "name": "proofplane:declared",
+          "value": "true"
+        },
+        {
+          "name": "proofplane:evidence",
+          "value": "operator/package-lock.json:12"
+        },
+        {
+          "name": "proofplane:evidence",
+          "value": "operator/package.json:23"
+        }
+      ]
+    },
+    {
+      "type": "machine-learning-model",
+      "bom-ref": "model/claude-sonnet-5",
+      "name": "claude-sonnet-5",
+      "version": "claude-sonnet-5",
+      "description": "const model = process.env.PROOFPLANE_OPERATOR_MODEL ?? 'claude-sonnet-5';",
+      "properties": [
+        {
+          "name": "proofplane:kind",
+          "value": "model"
+        },
+        {
+          "name": "proofplane:occurrences",
+          "value": "4"
+        },
+        {
+          "name": "proofplane:rule",
+          "value": "AID-001"
+        },
+        {
+          "name": "proofplane:declared",
+          "value": "true"
+        },
+        {
+          "name": "proofplane:evidence",
+          "value": "operator/src/cli.ts:58"
+        },
+        {
+          "name": "proofplane:evidence",
+          "value": "operator/test/boundary.test.ts:154"
+        },
+        {
+          "name": "proofplane:evidence",
+          "value": "target/src/config.ts:88"
+        },
+        {
+          "name": "proofplane:evidence",
+          "value": "target/test/guardrails.test.ts:108"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "sdk/@anthropic-ai/sdk",
+      "name": "@anthropic-ai/sdk",
+      "description": "\"@anthropic-ai/sdk\": \"^0.116.0\",",
+      "properties": [
+        {
+          "name": "proofplane:kind",
+          "value": "sdk"
+        },
+        {
+          "name": "proofplane:occurrences",
+          "value": "2"
+        },
+        {
+          "name": "proofplane:rule",
+          "value": "AID-010"
+        },
+        {
+          "name": "proofplane:declared",
+          "value": "true"
+        },
+        {
+          "name": "proofplane:evidence",
+          "value": "operator/package.json:26"
+        },
+        {
+          "name": "proofplane:evidence",
+          "value": "operator/src/cli.ts:2"
+        }
+      ]
+    }
+  ]
+}

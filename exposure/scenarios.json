@@ -1,0 +1,314 @@
+{
+  "schema": "proofplane.scenarios/v1",
+  "currency": "USD",
+  "iterations": 20000,
+  "seed": 20260810,
+  "_note": [
+    "Every number in this file is an estimate somebody made up, and the ones that matter most",
+    "are the control-effectiveness figures. They are three-point rather than single-point so",
+    "the uncertainty propagates into the answer instead of being hidden by a tidy percentage.",
+    "Replace all of them with your own calibrated estimates before any output here means",
+    "anything about your organisation. See docs/HONEST-LIMITS.md — this is a structure for your",
+    "numbers, not a source of them.",
+    "",
+    "Scenario frequency and magnitude are anchored on published breach-cost reporting for the",
+    "generic loss type (fraud, disclosure, regulatory), NOT on AI-specific incident data, which",
+    "is thin and mostly unpublished. That substitution is the single largest weakness here.",
+    "",
+    "That substitution is now checkable rather than merely admitted: each scenario declares the generic loss type it stands in for, and the report prints the published band for that type beside the modelled magnitude. Four of these eight have a published analogue at all; the rest are reported as having none rather than matched to the nearest breach study. See exposure/benchmarks.json and the cross-check section of the report."
+  ],
+  "scenarios": [
+    {
+      "id": "S-01",
+      "title": "Fraudulent refund driven by indirect prompt injection",
+      "description": "An attacker writes a directive into a support ticket. The agent reads it as instruction and issues a refund to an account they control.",
+      "frequency": {
+        "min": 2,
+        "mode": 12,
+        "max": 60
+      },
+      "magnitude": {
+        "min": 300,
+        "mode": 2500,
+        "max": 40000
+      },
+      "estimateBasis": "Frequency scaled from ticket volume against the share of tickets containing attacker-controlled free text. Magnitude bounded above by the largest single refund the agent path could authorise before PP-C007's ceiling.",
+      "effects": [
+        {
+          "controlId": "PP-C001",
+          "dimension": "frequency",
+          "reduction": {
+            "min": 0.85,
+            "mode": 0.95,
+            "max": 0.99
+          },
+          "basis": "The approval gate does not depend on what the model was persuaded of, so it holds against phrasings the filter has never seen. Not 1.0: a reviewer approving forty requests an hour will wave one through."
+        },
+        {
+          "controlId": "PP-C002",
+          "dimension": "frequency",
+          "reduction": {
+            "min": 0.2,
+            "mode": 0.5,
+            "max": 0.75
+          },
+          "basis": "Pattern-based directive stripping. Credited low deliberately — the limits demonstration shows a one-word paraphrase defeats it, so this is friction rather than a barrier."
+        },
+        {
+          "controlId": "PP-C007",
+          "dimension": "magnitude",
+          "reduction": {
+            "min": 0.6,
+            "mode": 0.8,
+            "max": 0.92
+          },
+          "basis": "The ceiling truncates the upper tail rather than reducing frequency. Reduction is on magnitude only, and only for events that would have exceeded it."
+        },
+        {
+          "controlId": "PP-C011",
+          "dimension": "frequency",
+          "reduction": {
+            "min": 0.05,
+            "mode": 0.15,
+            "max": 0.3
+          },
+          "basis": "Argument validation catches malformed amounts, which is a minority of attempts. Small credit on purpose."
+        }
+      ],
+      "genericLossType": "fraud"
+    },
+    {
+      "id": "S-02",
+      "title": "Cross-tenant record disclosure",
+      "description": "A session in one tenant retrieves another tenant's customer records through an over-scoped agent tool.",
+      "frequency": {
+        "min": 0.3,
+        "mode": 2,
+        "max": 10
+      },
+      "magnitude": {
+        "min": 25000,
+        "mode": 180000,
+        "max": 1200000
+      },
+      "estimateBasis": "Magnitude anchored on per-record notification and remediation costs from published breach-cost reporting, times a plausible record count for a single over-scoped query. Not AI-specific.",
+      "effects": [
+        {
+          "controlId": "PP-C003",
+          "dimension": "frequency",
+          "reduction": {
+            "min": 0.9,
+            "mode": 0.97,
+            "max": 0.995
+          },
+          "basis": "Ordinary authorisation, resolved from the session rather than model arguments. High credit because it does not depend on model behaviour at all."
+        },
+        {
+          "controlId": "PP-C008",
+          "dimension": "frequency",
+          "reduction": {
+            "min": 0.3,
+            "mode": 0.6,
+            "max": 0.85
+          },
+          "basis": "Tool allow-listing removes the plugin-supplied bulk export path specifically. Does not address a scoped tool being asked for the wrong tenant."
+        }
+      ],
+      "genericLossType": "disclosure"
+    },
+    {
+      "id": "S-03",
+      "title": "Sensitive identifier disclosed to an entitled caller",
+      "description": "The agent summarises an account record and repeats a national identifier or payment card number to someone entitled to the account but not to those fields.",
+      "frequency": {
+        "min": 5,
+        "mode": 40,
+        "max": 200
+      },
+      "magnitude": {
+        "min": 200,
+        "mode": 1500,
+        "max": 25000
+      },
+      "estimateBasis": "High frequency, low unit magnitude — this is the routine leak rather than the newsworthy one. Magnitude covers card reissue and per-incident handling, not regulatory action.",
+      "effects": [
+        {
+          "controlId": "PP-C004",
+          "dimension": "frequency",
+          "reduction": {
+            "min": 0.75,
+            "mode": 0.9,
+            "max": 0.97
+          },
+          "basis": "Shape-based egress redaction. Deliberately not higher: it cannot catch a value the model has reformatted, spelled out, or translated."
+        }
+      ],
+      "genericLossType": "disclosure"
+    },
+    {
+      "id": "S-04",
+      "title": "Data exfiltrated to an attacker-controlled destination",
+      "description": "The agent is induced to send account information outward to an address outside the caller's tenant.",
+      "frequency": {
+        "min": 0.2,
+        "mode": 1.5,
+        "max": 8
+      },
+      "magnitude": {
+        "min": 40000,
+        "mode": 250000,
+        "max": 2000000
+      },
+      "estimateBasis": "Treated as a reportable breach. Upper bound reflects a regulatory outcome rather than pure remediation cost.",
+      "effects": [
+        {
+          "controlId": "PP-C010",
+          "dimension": "frequency",
+          "reduction": {
+            "min": 0.88,
+            "mode": 0.96,
+            "max": 0.99
+          },
+          "basis": "A destination allow-list refuses before the approval queue, so it is not subject to reviewer fatigue. Not 1.0: an attacker inside the tenant domain is unaffected."
+        },
+        {
+          "controlId": "PP-C001",
+          "dimension": "frequency",
+          "reduction": {
+            "min": 0.5,
+            "mode": 0.75,
+            "max": 0.9
+          },
+          "basis": "The approval gate catches it if the destination check does not. Lower credit than in S-01 because a reviewer is checking an address, which is exactly what a tired reviewer skims."
+        }
+      ],
+      "genericLossType": "disclosure"
+    },
+    {
+      "id": "S-05",
+      "title": "Incident that cannot be reconstructed",
+      "description": "Something goes wrong and there is no record of what the agent was asked, what it called, or what it returned. The cost is the investigation that cannot conclude and the regulatory position that cannot be defended.",
+      "frequency": {
+        "min": 0.5,
+        "mode": 2,
+        "max": 6
+      },
+      "magnitude": {
+        "min": 15000,
+        "mode": 120000,
+        "max": 900000
+      },
+      "estimateBasis": "Magnitude is the delta between a defensible and an indefensible position on the same underlying incident, not the incident's own cost. Wide by nature.",
+      "effects": [
+        {
+          "controlId": "PP-C005",
+          "dimension": "magnitude",
+          "reduction": {
+            "min": 0.6,
+            "mode": 0.85,
+            "max": 0.95
+          },
+          "basis": "A complete, tamper-evident record converts most of this loss. Reduces magnitude, not frequency — logging does not stop incidents. Not higher because the chain is tamper-evident, not tamper-proof, and is not externally anchored."
+        },
+        {
+          "controlId": "PP-C009",
+          "dimension": "magnitude",
+          "reduction": {
+            "min": 0.15,
+            "mode": 0.35,
+            "max": 0.6
+          },
+          "basis": "Single-use, argument-bound approvals mean the record of who authorised what is actually true. Without it the log is complete and misleading, which is worse than incomplete."
+        }
+      ],
+      "genericLossType": null
+    },
+    {
+      "id": "S-06",
+      "title": "Assurance invalidated by a silent model change",
+      "description": "The serving model changes and every prior control result quietly stops applying. The cost is the re-assessment, plus whatever happened in the window where nobody knew.",
+      "frequency": {
+        "min": 1,
+        "mode": 4,
+        "max": 12
+      },
+      "magnitude": {
+        "min": 5000,
+        "mode": 45000,
+        "max": 400000
+      },
+      "estimateBasis": "Frequency reflects how often a provider ships a new version behind a moving alias. Magnitude is re-assessment effort plus a tail for a behaviour change nobody caught.",
+      "effects": [
+        {
+          "controlId": "PP-C006",
+          "dimension": "frequency",
+          "reduction": {
+            "min": 0.8,
+            "mode": 0.93,
+            "max": 0.98
+          },
+          "basis": "Pinning plus a published bill of materials makes a change a failed startup check rather than a silent event. Not 1.0: a provider can change behaviour behind a stable identifier."
+        }
+      ],
+      "genericLossType": null
+    },
+    {
+      "id": "S-07",
+      "title": "Authorisation repudiated after the fact",
+      "description": "An approval is replayed or redeemed with substituted arguments. The action happened, the record says a human approved it, and the human approved something else.",
+      "frequency": {
+        "min": 0.2,
+        "mode": 1,
+        "max": 5
+      },
+      "magnitude": {
+        "min": 10000,
+        "mode": 80000,
+        "max": 600000
+      },
+      "estimateBasis": "Magnitude includes the disputed transaction and the cost of an oversight control being shown not to work. Frequency is low but the failure is quiet, so discovery lags.",
+      "effects": [
+        {
+          "controlId": "PP-C009",
+          "dimension": "frequency",
+          "reduction": {
+            "min": 0.9,
+            "mode": 0.97,
+            "max": 0.995
+          },
+          "basis": "Single-use redemption with arguments frozen at request time. Deterministic and does not depend on model behaviour."
+        }
+      ],
+      "genericLossType": null
+    },
+    {
+      "id": "S-08",
+      "title": "System prompt disclosed, enabling a later attack",
+      "description": "The agent hands over its instructions. Little direct loss; the cost is that every subsequent attack is cheaper to construct.",
+      "frequency": {
+        "min": 3,
+        "mode": 15,
+        "max": 60
+      },
+      "magnitude": {
+        "min": 100,
+        "mode": 900,
+        "max": 12000
+      },
+      "estimateBasis": "The weakest scenario in the register. Disclosure is reconnaissance, and pricing reconnaissance as a standalone loss double-counts against the scenarios it enables. Kept deliberately small for that reason.",
+      "effects": [
+        {
+          "controlId": "PP-C012",
+          "dimension": "frequency",
+          "reduction": {
+            "min": 0.5,
+            "mode": 0.75,
+            "max": 0.9
+          },
+          "basis": "Overlap detection against the real system prompt catches reproduction and near-reproduction. It does not catch a faithful summary in the model's own words, which leaks most of the same value."
+        }
+      ],
+      "genericLossType": null
+    }
+  ]
+}

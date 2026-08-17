@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>proofplane — continuous assurance evidence</title>
+<meta name="description" content="Evidence from proofplane: AI governance controls proved by executed adversarial attacks.">
+<style>
+:root{
+  --bg:#FAFAF8;--panel:#FFFFFF;--panel-2:#F5F1E8;--border:#e0e0e0;
+  --ink:#1a1a1a;--ink-2:#444444;--ink-3:#666666;--accent:#6B63B5;--accent-soft:#efedf9;
+  --breach:#B4413F;--held:#2F7D53;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#1a1a1a;--panel:#242424;--panel-2:#2d2d2d;--border:#333333;
+    --ink:#f0f0f0;--ink-2:#c0c0c0;--ink-3:#999999;--accent:#8B7FD6;--accent-soft:#2b2740;
+    --breach:#E58A88;--held:#7FC79B;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;padding:2.5rem 1.25rem 4rem;background:var(--bg);color:var(--ink);
+  font:15px/1.65 ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:46rem;margin:0 auto}
+h1{font-size:1.7rem;margin:0 0 .35rem;letter-spacing:-.01em}
+.thesis{color:var(--ink-2);margin:0 0 2rem;font-size:1.02rem}
+.thesis b{color:var(--ink)}
+h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.09em;color:var(--ink-3);
+  margin:2rem 0 .75rem;font-weight:600}
+a.card{display:block;background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);
+  border-radius:9px;padding:.9rem 1.1rem;margin-bottom:.6rem;text-decoration:none;color:inherit}
+a.card:hover{border-color:var(--accent)}
+a.card .t{font-weight:600;margin-bottom:.15rem}
+a.card .d{color:var(--ink-3);font-size:.87rem}
+a.card.held{border-left-color:var(--held)}
+a.card.breach{border-left-color:var(--breach)}
+.note{background:var(--panel-2);border-radius:8px;padding:.85rem 1.05rem;font-size:.89rem;
+  color:var(--ink-2);margin:1.25rem 0}
+footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--border);
+  color:var(--ink-3);font-size:.84rem}
+footer a{color:var(--accent)}
+</style>
+</head>
+<body><div class="wrap">
+
+<h1>proofplane</h1>
+<p class="thesis">An AI governance control plane where a control is satisfied
+<b>only when an executed adversarial attack failed</b> — never because a document says it exists.
+Everything linked below was produced by a pipeline run, not written by hand.</p>
+
+<h2>Assurance reports</h2>
+
+<a class="card held" href="evidence/guarded/report.html">
+  <div class="t">Guarded configuration — 12 controls held</div>
+  <div class="d">All twelve guardrails enabled. Includes the 12&times;12 independence matrix:
+    every probe breached when, and only when, its own guardrail was removed.</div>
+</a>
+
+<a class="card breach" href="evidence/unguarded/report.html">
+  <div class="t">Unguarded configuration — 12 controls breached</div>
+  <div class="d">Every guardrail disabled. This is what makes the report above mean something:
+    a suite that cannot go red proves nothing when it is green.</div>
+</a>
+
+<h2>What it is worth</h2>
+
+<a class="card" href="evidence/exposure.html">
+  <div class="t">Loss exposure, bound to control state</div>
+  <div class="d">FAIR Monte Carlo over eight scenarios, where a control is credited only if a
+    probe executed an attack against it and the attack failed. Inherent against residual, and
+    what each control is worth per year by counterfactual. When a guardrail stops holding, the
+    dollar figure moves on the next run.</div>
+</a>
+
+<h2>Machine-readable output</h2>
+
+<a class="card" href="evidence/guarded/oscal-assessment-results.json">
+  <div class="t">OSCAL assessment results</div>
+  <div class="d">Validated against the NIST OSCAL 1.1.2 schema. Every observation carries
+    method <code>TEST</code>, because that is what happened.</div>
+</a>
+
+<a class="card" href="evidence/aibom.json">
+  <div class="t">AI bill of materials</div>
+  <div class="d">CycloneDX 1.6 ML-BOM of this repository's own AI surface, with the file and
+    line that produced each component.</div>
+</a>
+
+<a class="card" href="evidence/limits.json">
+  <div class="t">Limitation demonstrations</div>
+  <div class="d">The weaknesses the documentation admits to, executed against a fully guarded
+    target rather than asserted.</div>
+</a>
+
+<a class="card" href="evidence/exposure.json">
+  <div class="t">Loss exposure model output</div>
+  <div class="d">Every figure from the exposure report, with the evidence run and head hash it
+    was derived from.</div>
+</a>
+
+<div class="note">
+  <b>Read the status honestly.</b> These runs use a deterministic model double, so a
+  <i>held</i> result is evidence that the guardrail works — not that any model is safe. Against a
+  live model, zero breaches in three trials is consistent with a true failure rate above 50%,
+  which is why every result shows its trial count.
+</div>
+
+<footer>
+  Source, threat model, and the full honest-limits account:
+  <a href="https://github.com/RootCawsLLC/proofplane">github.com/RootCawsLLC/proofplane</a><br>
+  Copyright &copy; 2026 RootCaws LLC &middot; AGPL-3.0-or-later
+</footer>
+
+</div></body>
+</html>

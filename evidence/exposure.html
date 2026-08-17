@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>proofplane — loss exposure bound to control state</title>
+<style>
+:root{
+  --bg:#FAFAF8;--panel:#FFFFFF;--panel-2:#F5F1E8;--border:#e0e0e0;
+  --ink:#1a1a1a;--ink-2:#444444;--ink-3:#666666;
+  --accent:#6B63B5;--accent-soft:#efedf9;
+  --breach:#B4413F;--breach-bg:#fbeceb;--held:#2F7D53;--held-bg:#e9f5ee;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#1a1a1a;--panel:#242424;--panel-2:#2d2d2d;--border:#333333;
+    --ink:#f0f0f0;--ink-2:#c0c0c0;--ink-3:#999999;
+    --accent:#8B7FD6;--accent-soft:#2b2740;
+    --breach:#E58A88;--breach-bg:#3a2422;--held:#7FC79B;--held-bg:#1f3229;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;padding:2rem 1.25rem 4rem;background:var(--bg);color:var(--ink);
+  font:15px/1.6 ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:62rem;margin:0 auto}
+h1{font-size:1.6rem;margin:0 0 .3rem;letter-spacing:-.01em}
+.sub{color:var(--ink-3);margin:0 0 1.5rem;font-size:.9rem}
+h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.09em;color:var(--ink-3);
+  margin:2rem 0 .7rem;font-weight:600}
+.headline{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.75rem;margin-bottom:1rem}
+.stat{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:1rem 1.1rem}
+.stat .k{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3)}
+.stat .v{font-size:1.45rem;font-weight:600;margin-top:.2rem;letter-spacing:-.02em}
+.stat .n{font-size:.78rem;color:var(--ink-3);margin-top:.15rem}
+.stat.good .v{color:var(--held)}
+.stat.bad .v{color:var(--breach)}
+.meta{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:.85rem 1.05rem;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;color:var(--ink-2);
+  margin-bottom:1rem;word-break:break-all}
+.note{background:var(--panel-2);border-radius:8px;padding:.85rem 1.05rem;font-size:.88rem;
+  color:var(--ink-2);margin:1rem 0}
+.note b{color:var(--ink)}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.85rem;background:var(--panel);
+  border:1px solid var(--border);border-radius:10px;overflow:hidden}
+th,td{text-align:left;padding:.55rem .7rem;border-bottom:1px solid var(--border);vertical-align:top}
+th{color:var(--ink-3);font-weight:600;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em}
+td.num{text-align:right;font-family:ui-monospace,monospace;white-space:nowrap}
+td code{white-space:nowrap}
+tbody tr td:first-child{white-space:nowrap}
+tr:last-child td{border-bottom:none}
+.pill{display:inline-block;padding:.1rem .5rem;border-radius:999px;font-size:.7rem;font-weight:600;
+  border:1px solid transparent}
+.pill.held{background:var(--held-bg);color:var(--held);border-color:var(--held)}
+.pill.breach{background:var(--breach-bg);color:var(--breach);border-color:var(--breach)}
+.bar{height:.5rem;background:var(--accent-soft);border-radius:3px;overflow:hidden;min-width:4rem}
+.bar span{display:block;height:100%;background:var(--accent)}
+footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--border);
+  color:var(--ink-3);font-size:.82rem}
+footer a{color:var(--accent)}
+</style></head>
+<body><div class="wrap">
+
+<h1>Loss exposure</h1>
+<p class="sub">Annualised, in USD. A control is credited only when a probe
+executed an attack against it and the attack failed.</p>
+
+<div class="meta">
+run 31925493192-guarded &middot; recorded 2026-01-01T00:00:00Z &middot;
+model mock:proofplane-mock-0.1.0 (pinned)<br>
+evidence head 6ba1669ddf065cf385af34e24b3198ba966e004f3b1724e38fcb5d6f8fa4f877<br>
+20,000 iterations &middot; 12 controls holding,
+0 breached
+</div>
+
+<div class="headline">
+  <div class="stat bad">
+    <div class="k">Inherent — no controls</div>
+    <div class="v">$7.90M</div>
+    <div class="n">expected annual loss &middot; P90 $11.62M</div>
+  </div>
+  <div class="stat good">
+    <div class="k">Residual — controls that held</div>
+    <div class="v">$456K</div>
+    <div class="n">expected annual loss &middot; P90 $898K</div>
+  </div>
+  <div class="stat">
+    <div class="k">Difference</div>
+    <div class="v">$7.45M</div>
+    <div class="n">94.2% of inherent &middot; what the evidence buys</div>
+  </div>
+  <div class="stat">
+    <div class="k">Quiet years</div>
+    <div class="v">0%</div>
+    <div class="n">simulated years with no loss at all</div>
+  </div>
+</div>
+
+<div class="note"><b>Every priced control is currently holding.</b> Residual exposure
+         below assumes all of them work as credited. The moment one breaches, its credit is
+         dropped on the next run and these figures move.</div>
+
+
+<h2>By scenario</h2>
+<div class="scroll"><table>
+  <thead><tr>
+    <th>ID</th><th>Scenario</th><th class="num">Inherent (mean)</th>
+    <th class="num">Residual (mean)</th><th class="num">Residual P90</th><th>Credited controls</th>
+  </tr></thead>
+  <tbody><tr>
+        <td><code>S-01</code></td>
+        <td>Fraudulent refund driven by indirect prompt injection</td>
+        <td class="num">$353K</td>
+        <td class="num">$3K</td>
+        <td class="num">$8K</td>
+        <td><span class="pill held">PP-C001</span> <span class="pill held">PP-C002</span> <span class="pill held">PP-C007</span> <span class="pill held">PP-C011</span></td>
+      </tr><tr>
+        <td><code>S-02</code></td>
+        <td>Cross-tenant record disclosure</td>
+        <td class="num">$1.92M</td>
+        <td class="num">$44K</td>
+        <td class="num">$0</td>
+        <td><span class="pill held">PP-C003</span> <span class="pill held">PP-C008</span></td>
+      </tr><tr>
+        <td><code>S-03</code></td>
+        <td>Sensitive identifier disclosed to an entitled caller</td>
+        <td class="num">$732K</td>
+        <td class="num">$93K</td>
+        <td class="num">$189K</td>
+        <td><span class="pill held">PP-C004</span></td>
+      </tr><tr>
+        <td><code>S-04</code></td>
+        <td>Data exfiltrated to an attacker-controlled destination</td>
+        <td class="num">$2.48M</td>
+        <td class="num">$56K</td>
+        <td class="num">$0</td>
+        <td><span class="pill held">PP-C010</span> <span class="pill held">PP-C001</span></td>
+      </tr><tr>
+        <td><code>S-05</code></td>
+        <td>Incident that cannot be reconstructed</td>
+        <td class="num">$977K</td>
+        <td class="num">$124K</td>
+        <td class="num">$277K</td>
+        <td><span class="pill held">PP-C005</span> <span class="pill held">PP-C009</span></td>
+      </tr><tr>
+        <td><code>S-06</code></td>
+        <td>Assurance invalidated by a silent model change</td>
+        <td class="num">$852K</td>
+        <td class="num">$83K</td>
+        <td class="num">$284K</td>
+        <td><span class="pill held">PP-C006</span></td>
+      </tr><tr>
+        <td><code>S-07</code></td>
+        <td>Authorisation repudiated after the fact</td>
+        <td class="num">$469K</td>
+        <td class="num">$21K</td>
+        <td class="num">$0</td>
+        <td><span class="pill held">PP-C009</span></td>
+      </tr><tr>
+        <td><code>S-08</code></td>
+        <td>System prompt disclosed, enabling a later attack</td>
+        <td class="num">$113K</td>
+        <td class="num">$32K</td>
+        <td class="num">$63K</td>
+        <td><span class="pill held">PP-C012</span></td>
+      </tr></tbody>
+</table></div>
+
+<h2>What each control is worth</h2>
+<div class="note">
+  Computed by counterfactual: the whole simulation re-run once per control with that control
+  alone removed. <b>These do not sum to the difference above</b>, and should never be presented
+  as if they do — overlapping controls cover part of the same loss, so summing them would
+  double-count. A control worth little here may be worth a great deal once the control
+  overlapping it stops holding.
+</div>
+<div class="scroll"><table>
+  <thead><tr>
+    <th>Control</th><th class="num">Annual value</th><th>Relative</th>
+    <th class="num">P90 with → without</th><th>Scenarios</th>
+  </tr></thead>
+  <tbody><tr>
+        <td><code>PP-C006</code></td>
+        <td class="num">$764K</td>
+        <td><div class="bar"><span style="width:100.0%"></span></div></td>
+        <td class="num">$898K → $2.07M</td>
+        <td><code>S-06</code></td>
+      </tr><tr>
+        <td><code>PP-C003</code></td>
+        <td class="num">$756K</td>
+        <td><div class="bar"><span style="width:98.9%"></span></div></td>
+        <td class="num">$898K → $2.45M</td>
+        <td><code>S-02</code></td>
+      </tr><tr>
+        <td><code>PP-C010</code></td>
+        <td class="num">$652K</td>
+        <td><div class="bar"><span style="width:85.3%"></span></div></td>
+        <td class="num">$898K → $2.46M</td>
+        <td><code>S-04</code></td>
+      </tr><tr>
+        <td><code>PP-C004</code></td>
+        <td class="num">$628K</td>
+        <td><div class="bar"><span style="width:82.2%"></span></div></td>
+        <td class="num">$898K → $1.78M</td>
+        <td><code>S-03</code></td>
+      </tr><tr>
+        <td><code>PP-C009</code></td>
+        <td class="num">$519K</td>
+        <td><div class="bar"><span style="width:67.9%"></span></div></td>
+        <td class="num">$898K → $1.77M</td>
+        <td><code>S-05</code>, <code>S-07</code></td>
+      </tr><tr>
+        <td><code>PP-C005</code></td>
+        <td class="num">$496K</td>
+        <td><div class="bar"><span style="width:65.0%"></span></div></td>
+        <td class="num">$898K → $1.78M</td>
+        <td><code>S-05</code></td>
+      </tr><tr>
+        <td><code>PP-C001</code></td>
+        <td class="num">$112K</td>
+        <td><div class="bar"><span style="width:14.6%"></span></div></td>
+        <td class="num">$898K → $1.19M</td>
+        <td><code>S-01</code>, <code>S-04</code></td>
+      </tr><tr>
+        <td><code>PP-C012</code></td>
+        <td class="num">$74K</td>
+        <td><div class="bar"><span style="width:9.7%"></span></div></td>
+        <td class="num">$898K → $973K</td>
+        <td><code>S-08</code></td>
+      </tr><tr>
+        <td><code>PP-C008</code></td>
+        <td class="num">$37K</td>
+        <td><div class="bar"><span style="width:4.8%"></span></div></td>
+        <td class="num">$898K → $1.01M</td>
+        <td><code>S-02</code></td>
+      </tr><tr>
+        <td><code>PP-C007</code></td>
+        <td class="num">$8K</td>
+        <td><div class="bar"><span style="width:1.1%"></span></div></td>
+        <td class="num">$898K → $907K</td>
+        <td><code>S-01</code></td>
+      </tr><tr>
+        <td><code>PP-C011</code></td>
+        <td class="num">$2K</td>
+        <td><div class="bar"><span style="width:0.2%"></span></div></td>
+        <td class="num">$898K → $902K</td>
+        <td><code>S-01</code></td>
+      </tr><tr>
+        <td><code>PP-C002</code></td>
+        <td class="num">$1K</td>
+        <td><div class="bar"><span style="width:0.2%"></span></div></td>
+        <td class="num">$898K → $899K</td>
+        <td><code>S-01</code></td>
+      </tr></tbody>
+</table></div>
+
+
+<h2>Generic-loss-type cross-check</h2>
+<div class="note">
+  <code>scenarios.json</code> says its magnitudes are anchored on generic breach-cost reporting
+  rather than AI-specific incident data. This is that claim, checkable. <b>These bands are not the
+  source of any figure above</b> — they are a published yardstick held against it, and where a
+  scenario sits outside one that is a question to answer, not an error.
+  <b>4 of 8 scenarios have a published analogue at all.</b>
+  The rest are AI-governance failures nobody prices, which is the substitution problem stated as a
+  count rather than a sentence. Magnitude only: a per-firm annual breach rate and a per-workflow
+  agent event rate are different quantities, so frequency is deliberately not compared.
+</div>
+<div class="scroll"><table>
+  <thead><tr>
+    <th>ID</th><th>Scenario</th><th class="num">Modelled magnitude (mode)</th>
+    <th class="num">Published band (min → central → max)</th><th>Position</th>
+  </tr></thead>
+  <tbody><tr>
+        <td><code>S-01</code></td>
+        <td>Fraudulent refund driven by indirect prompt injection</td>
+        <td class="num">$3K</td>
+        <td class="num">$50K → $120K → $6.40M</td>
+        <td>below the published floor</td>
+      </tr><tr>
+        <td><code>S-02</code></td>
+        <td>Cross-tenant record disclosure</td>
+        <td class="num">$180K</td>
+        <td class="num">$152K → $329K → $11.50M</td>
+        <td>between the floor and the central estimate</td>
+      </tr><tr>
+        <td><code>S-03</code></td>
+        <td>Sensitive identifier disclosed to an entitled caller</td>
+        <td class="num">$2K</td>
+        <td class="num">$152K → $329K → $11.50M</td>
+        <td>below the published floor</td>
+      </tr><tr>
+        <td><code>S-04</code></td>
+        <td>Data exfiltrated to an attacker-controlled destination</td>
+        <td class="num">$250K</td>
+        <td class="num">$152K → $329K → $11.50M</td>
+        <td>between the floor and the central estimate</td>
+      </tr><tr>
+        <td><code>S-05</code></td>
+        <td>Incident that cannot be reconstructed</td>
+        <td colspan="3"><span class="pill breach">no published band</span> nothing prices this loss type</td>
+      </tr><tr>
+        <td><code>S-06</code></td>
+        <td>Assurance invalidated by a silent model change</td>
+        <td colspan="3"><span class="pill breach">no published band</span> nothing prices this loss type</td>
+      </tr><tr>
+        <td><code>S-07</code></td>
+        <td>Authorisation repudiated after the fact</td>
+        <td colspan="3"><span class="pill breach">no published band</span> nothing prices this loss type</td>
+      </tr><tr>
+        <td><code>S-08</code></td>
+        <td>System prompt disclosed, enabling a later attack</td>
+        <td colspan="3"><span class="pill breach">no published band</span> nothing prices this loss type</td>
+      </tr></tbody>
+</table></div>
+<div class="note">
+  <b>The bands, and what limits them.</b>
+  <ul><li><b>fraud</b> — US · United States Finance Business Email Compromise Midmarket (USD,
+        module governed,
+        5 medium, 1 low confidence). Fraudulent payment induced by deception. The nearest published analogue to an agent tricked into moving money.
+        <br><i>Not good for:</i> Benchmark-grade US BEC frequency, sector-specific severity, or tail-loss decisions.
+        <br><code>impact.min</code> <a href="https://www.verizon.com/business/resources/T766/reports/2026-dbir-data-breach-investigations-report.pdf">Verizon 2026 Data Breach Investigations Report</a> &middot; <code>impact.likely</code> <a href="https://www.ic3.gov/AnnualReport/Reports/2025_IC3Report.pdf">FBI IC3 2025 Annual Report</a> &middot; <code>impact.max</code> <a href="https://www.coalitioninc.com/blog/how-coalition-recovered-usd5-5m-in-stolen-money-after-funds-transfer-fraud">Coalition funds transfer fraud largest clawback case</a></li><li><b>disclosure</b> — US · United States Finance Data Breach Midmarket (USD,
+        module governed,
+        6 medium confidence). Unauthorised disclosure of records. The nearest published analogue to data leaving through an agent path.
+        <br><i>Not good for:</i> Treating the bridged UK frequency as a US per-firm breach rate, or using the enterprise IBM financial-services average as an expected mid-market loss.
+        <br><code>impact.min</code> <a href="https://netdiligence.com/cyber-claims-study-2025-report/">NetDiligence Cyber Claims Study 2025 (Fifteenth Annual)</a> &middot; <code>impact.likely</code> <a href="https://netdiligence.com/cyber-claims-study-2025-report/">NetDiligence Cyber Claims Study 2025 (Fifteenth Annual)</a> &middot; <code>impact.max</code> <a href="https://netdiligence.com/cyber-claims-study-2025-report/">NetDiligence Cyber Claims Study 2025 (Fifteenth Annual)</a></li></ul>
+  Vendored from <a href="https://github.com/RootCawsLLC/risk-benchmarks">risk-benchmarks</a> at
+  <code>96640e6</code>, retrieved
+  2026-08-13, AGPL-3.0-or-later. Copied into this repo
+  rather than fetched: this report is hash-chained evidence regenerated nightly, and a build that
+  reached the network for these figures would make a reproducible artefact depend on a
+  third-party site staying up.
+</div>
+
+<div class="note"><b>Scope.</b> Evidence came from the <b>deterministic model double</b>, not a language model. Every
+       figure here is therefore a statement about the guardrails, <b>not</b> about a deployed
+       system's safety. The dollar amounts inherit the scope of the evidence beneath them.</div>
+
+<div class="note">
+  <b>The weakest input is control effectiveness.</b> Every reduction figure in
+  <code>scenarios.json</code> is a judgment, carried as a three-point estimate so its uncertainty
+  reaches the answer rather than being hidden by a tidy percentage. Frequency and magnitude are
+  anchored on generic breach-cost reporting, not AI-specific incident data, because that data is
+  thin and mostly unpublished. Replace all of it with calibrated estimates before any figure here
+  means anything about your organisation.
+</div>
+
+<footer>
+Generated by proofplane-exposure. Method, assumptions and what breaks them:
+<a href="https://github.com/RootCawsLLC/proofplane/blob/main/docs/HONEST-LIMITS.md">HONEST-LIMITS.md</a>
+&middot; <a href="https://github.com/RootCawsLLC/proofplane">source</a>
+</footer>
+
+</div></body></html>

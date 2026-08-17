@@ -1,0 +1,216 @@
+name: assurance
+
+# Continuous assurance, not periodic review. The suite runs on every change and every night,
+# and the nightly evidence is committed so the record of what held and what did not is a diff
+# rather than a screenshot in someone's folder.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unit:
+    name: unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: target/package-lock.json
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      # discover has no third-party dependencies, so there is no go.sum to key a cache on.
+      - uses: actions/setup-go@v7
+        with:
+          go-version: '1.22'
+          cache: false
+
+      - name: vet and test discover
+        working-directory: discover
+        run: |
+          go vet ./...
+          go test ./...
+
+      - name: install target deps
+        working-directory: target
+        run: npm ci
+
+      - name: typecheck target
+        working-directory: target
+        run: npm run typecheck
+
+      - name: test target
+        working-directory: target
+        run: npm test
+
+      - name: install probe
+        run: python -m pip install --quiet ./probe
+
+      - name: test probe
+        working-directory: probe
+        run: python -m unittest discover -s tests -v
+
+      # The operator's tests read the committed evidence and catalog snapshot rather than
+      # generating fresh ones. That is deliberate: it makes CI check that what is in the
+      # repository is internally consistent — a committed chain that no longer verifies, or a
+      # catalog snapshot that has drifted from the YAML, fails here instead of going unnoticed.
+      # The full pipeline runs in the assurance job below.
+      - name: install operator deps
+        working-directory: operator
+        run: npm ci
+
+      - name: typecheck operator
+        working-directory: operator
+        run: npm run typecheck
+
+      - name: test operator
+        working-directory: operator
+        run: npm test
+
+      - name: install exposure deps
+        working-directory: exposure
+        run: npm ci
+
+      - name: typecheck exposure
+        working-directory: exposure
+        run: npm run typecheck
+
+      - name: test exposure
+        working-directory: exposure
+        run: npm test
+
+  assurance:
+    name: continuous assurance
+    runs-on: ubuntu-latest
+    needs: unit
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: target/package-lock.json
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      # Required by step 1 of scripts/assure.sh. Without it the script skips discovery and says
+      # so loudly rather than producing a run that silently has no AI inventory behind it.
+      - uses: actions/setup-go@v7
+        with:
+          go-version: '1.22'
+          cache: false
+
+      - name: install
+        run: |
+          npm ci --prefix target
+          npm ci --prefix exposure
+          npm ci
+          python -m pip install --quiet ./probe
+
+      - name: run assurance suite
+        env:
+          RUN_ID: ${{ github.run_id }}
+          # Fixed stamp so a re-run of the same commit produces byte-identical evidence.
+          RUN_TS: '2026-01-01T00:00:00Z'
+          TRIALS: '3'
+        run: bash scripts/assure.sh
+
+      # A catalog snapshot or evidence chain that differs from what is committed means the
+      # repository is serving a view of itself that a fresh run does not reproduce. Reported
+      # rather than enforced: the timestamps in a scheduled run legitimately differ from the
+      # committed ones, and failing on that would train people to ignore the check.
+      - name: report drift against committed artefacts
+        if: always()
+        run: |
+          git diff --stat -- catalog/catalog.json evidence/ || true
+          if git diff --quiet -- catalog/catalog.json; then
+            echo "catalog snapshot matches the committed copy"
+          else
+            echo "::warning::catalog.json differs from the committed snapshot"
+          fi
+
+      - name: upload evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: evidence-${{ github.run_id }}
+          path: evidence/
+          retention-days: 90
+
+      # Partial mitigation for the tamper-evidence limit in docs/HONEST-LIMITS.md. The evidence
+      # chain is only as good as its head hash, and a head hash committed to this repository can
+      # be recomputed by anyone who can rewrite this repository. Writing it into the workflow run
+      # summary puts a copy somewhere the repository owner cannot silently edit. It is an anchor,
+      # not a notarisation — a real one needs a transparency log.
+      - name: anchor evidence head hashes
+        if: always()
+        run: |
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json, pathlib
+          print("## Evidence anchors\n")
+          print("| configuration | controls held | head hash |")
+          print("|---|---|---|")
+          for p in sorted(pathlib.Path("evidence").glob("*/evidence.json")):
+              d = json.load(open(p))
+              held = sum(1 for r in d["records"] if r["outcome"] == "HELD")
+              print(f"| {p.parent.name} | {held}/{len(d['records'])} | `{d['head_hash']}` |")
+          print("\nRecorded outside the repository so a later rewrite of the committed evidence")
+          print("is detectable. See docs/HONEST-LIMITS.md.")
+          PY
+
+      # The guarded configuration is the one that represents the system we claim to run. A
+      # breach there is a failing build, not a dashboard entry someone gets to triage later.
+      - name: fail if the guarded configuration breached
+        run: |
+          python - <<'PY'
+          import json, sys
+          data = json.load(open('evidence/guarded/evidence.json'))
+          breached = [r['control_id'] for r in data['records'] if r['outcome'] != 'HELD']
+          if breached:
+              print(f"controls not held under the guarded configuration: {breached}")
+              sys.exit(1)
+          print(f"all {len(data['records'])} controls held")
+          PY
+
+  publish-evidence:
+    name: commit nightly evidence
+    runs-on: ubuntu-latest
+    needs: assurance
+    if: github.event_name == 'schedule'
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: evidence-${{ github.run_id }}
+          path: evidence/
+
+      - name: commit if the evidence changed
+        run: |
+          git config user.name  'proofplane-assurance[bot]'
+          git config user.email 'proofplane-assurance@users.noreply.github.com'
+          git add evidence/
+          if git diff --cached --quiet; then
+            echo 'no change in assurance posture'
+          else
+            git commit -m "assurance: nightly evidence for run ${{ github.run_id }}"
+            git push
+          fi

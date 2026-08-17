@@ -1,0 +1,15 @@
+{
+  "name": "proofplane",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Repo-level tooling. The target and probe packages are self-contained; this exists only for cross-cutting validators.",
+  "license": "AGPL-3.0-or-later",
+  "type": "module",
+  "scripts": {
+    "validate:oscal": "node scripts/validate-oscal.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  }
+}

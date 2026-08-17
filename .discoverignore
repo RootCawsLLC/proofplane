@@ -1,0 +1,21 @@
+# Paths excluded from the AI surface inventory.
+#
+# Every line here is a judgement that a model identifier appearing in this path is NOT evidence
+# that this system uses that model. Each one is a place the inventory is deliberately blind, so
+# each one needs a reason.
+
+# The scanner's own detection rules. `command-r` appears here because the regex that finds
+# `command-r` contains it. Found by running the tool against its own repository.
+discover/internal/scan/rules.go
+
+# Test fixtures and assertions. discover/testdata/sample is a synthetic project built to be
+# detected; scan_test.go asserts that `gpt-4-turbo` inside node_modules is NOT reported, which
+# requires the string to be present in the test.
+discover/testdata/
+discover/internal/scan/scan_test.go
+discover/internal/aibom/aibom_test.go
+
+# Evidence and generated inventories. These record what a previous scan found; including them
+# would let an old finding keep itself alive after the code that produced it was deleted.
+evidence/
+catalog/corroboration/cache/

@@ -1,0 +1,76 @@
+id: PP-C005
+title: Every agent interaction is recorded in a tamper-evident log
+guardrail: G5
+
+statement: >
+  The system appends a record of each interaction — inbound message, retrieved context,
+  every tool call and result, final output, and guardrail decisions — to an append-only log
+  in which each entry commits to the hash of its predecessor.
+
+rationale: >
+  Oversight that cannot be reconstructed after the fact is not oversight. An ordinary
+  application log is sufficient for debugging and insufficient for assurance, because nothing
+  prevents an entry being altered or removed. Chaining each entry to its predecessor makes
+  removal detectable without requiring external infrastructure, which is the cheapest
+  tamper-evidence that is honestly describable as such.
+
+limits: >
+  Hash chaining is tamper-EVIDENT, not tamper-PROOF. An actor who can rewrite the whole file
+  can recompute the chain. Real assurance requires the head hash to be anchored somewhere the
+  same actor does not control. This implementation does not do that, and says so.
+
+threat:
+  atlas: []
+  # Nothing in the OWASP Agentic Top 10 2026 is about observability, and nothing is claimed.
+  # An earlier version cited "ASI09 Insufficient Observability"; ASI09 is Human-Agent Trust
+  # Exploitation, which is a different concern. This control's authority is EU AI Act Article 12,
+  # which is explicit about record-keeping, and it does not need a threat-list entry to justify
+  # itself. A blank column is more useful than a plausible one.
+  owasp_asi: []
+
+proved_by: [PP-P005]
+
+assertion:
+  type: executed_probe
+  passes_when: >
+    Each interaction produces a log entry containing the message, all tool calls, and the
+    final output; and the chain verifies from genesis to head after an entry is tampered with
+    by the probe.
+  fails_when: >
+    No log exists, an interaction is absent from it, or a modified entry still verifies.
+
+crosswalk:
+  - framework: EU AI Act
+    reference: Article 12
+    reference_kind: article
+    label: Record-keeping
+    confidence: high
+    basis: >
+      Article 12 requires high-risk systems to technically allow automatic recording of events
+      over the system's lifetime. Article 19 requires deployers to keep logs for at least six
+      months. This control implements the recording capability, not the retention period.
+  - framework: ISO/IEC 42001:2023
+    reference: A.6
+    reference_kind: annex_a_group
+    label: AI system lifecycle
+    confidence: low
+    basis: Annex A group level only; operational logging is an inferred fit.
+  - framework: NIST AI RMF 1.0
+    reference: MANAGE-4.1
+    reference_kind: subcategory
+    confidence: medium
+    basis: Post-deployment monitoring and documentation. Approximate anchor.
+  - framework: AIUC-1
+    reference: Accountability
+    reference_kind: domain
+    confidence: high
+    basis: Domain level only.
+  - framework: ISO/IEC 27001:2022
+    reference: A.8.15
+    reference_kind: annex_a_control
+    label: Logging
+    confidence: medium
+    basis: Ordinary logging control; included so this is not framed as AI-specific.
+
+references:
+  - https://artificialintelligenceact.eu/article/12/

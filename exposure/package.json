@@ -1,0 +1,25 @@
+{
+  "name": "@proofplane/exposure",
+  "version": "0.1.0",
+  "private": true,
+  "description": "FAIR loss exposure bound to live control state. A guardrail that stops holding moves a dollar figure, not a colour.",
+  "license": "AGPL-3.0-or-later",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "proofplane-exposure": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "pretest": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "schema": "proofplane.exposure.benchmarks/1",
+  "_note": [
+    "Vendored, not fetched. proofplane's evidence is hash-chained and regenerated nightly in CI;",
+    "a build that reached the network for these figures would make a reproducible artefact depend",
+    "on a third-party site being up. Refresh by hand from the source below and commit the change.",
+    "",
+    "These are NOT the source of any figure in scenarios.json. They exist so a reviewer can check",
+    "the claim scenarios.json makes about itself: that its magnitudes are anchored on generic",
+    "breach-cost reporting rather than AI-specific data. Only magnitude is carried across.",
+    "Frequency is deliberately omitted - a per-firm annual breach rate and a per-workflow agent",
+    "event rate are not the same quantity and comparing them would be worse than not comparing."
+  ],
+  "source": {
+    "corpus": "https://github.com/RootCawsLLC/risk-benchmarks",
+    "upstream": "https://github.com/raviaxo/RiskShard",
+    "upstreamCommit": "96640e67957f4cb59607fc0a8daee8bc379bd59d",
+    "license": "AGPL-3.0-or-later",
+    "retrieved": "2026-08-13"
+  },
+  "lossTypes": [
+    {
+      "lossType": "fraud",
+      "benchmarkId": "us_finance_bec_midmarket",
+      "label": "US · United States Finance Business Email Compromise Midmarket",
+      "why": "Fraudulent payment induced by deception. The nearest published analogue to an agent tricked into moving money.",
+      "currency": "USD",
+      "magnitude": {
+        "min": 50000,
+        "likely": 120000,
+        "max": 6400000
+      },
+      "provenanceTier": "module_governed",
+      "confidence": {
+        "medium": 5,
+        "low": 1
+      },
+      "notGoodFor": "Benchmark-grade US BEC frequency, sector-specific severity, or tail-loss decisions.",
+      "sources": [
+        {
+          "parameter": "impact.min",
+          "name": "Verizon 2026 Data Breach Investigations Report",
+          "url": "https://www.verizon.com/business/resources/T766/reports/2026-dbir-data-breach-investigations-report.pdf",
+          "confidence": "medium",
+          "limitation": "Median of FBI IC3 complaint-reported BEC losses as presented by Verizon DBIR; complaint-driven and self-reported, not financial-services-specific or mid-market-specific, and not a formal minimum quantile for this scenario."
+        },
+        {
+          "parameter": "impact.likely",
+          "name": "FBI IC3 2025 Annual Report",
+          "url": "https://www.ic3.gov/AnnualReport/Reports/2025_IC3Report.pdf",
+          "confidence": "medium",
+          "limitation": "US IC3 complaint population; self-reported and complaint-driven; not financial-services-specific, mid-market-specific, or a full loss distribution."
+        },
+        {
+          "parameter": "impact.max",
+          "name": "Coalition funds transfer fraud largest clawback case",
+          "url": "https://www.coalitioninc.com/blog/how-coalition-recovered-usd5-5m-in-stolen-money-after-funds-transfer-fraud",
+          "confidence": "low",
+          "limitation": "One documented extreme funds-transfer-fraud case from a cyber insurer's book, not a modeled loss percentile or a financial-services mid-market average; 85% was recovered via clawback in this instance, but recovery is not guaranteed, so the gross figure is modeled; BEC/FTF-specific but drawn from a single case. Revise when a US mid-market BEC loss distribution with tail quantiles is reviewed."
+        }
+      ]
+    },
+    {
+      "lossType": "disclosure",
+      "benchmarkId": "us_finance_data_breach_midmarket",
+      "label": "US · United States Finance Data Breach Midmarket",
+      "why": "Unauthorised disclosure of records. The nearest published analogue to data leaving through an agent path.",
+      "currency": "USD",
+      "magnitude": {
+        "min": 152000,
+        "likely": 329000,
+        "max": 11500000
+      },
+      "provenanceTier": "module_governed",
+      "confidence": {
+        "medium": 6
+      },
+      "notGoodFor": "Treating the bridged UK frequency as a US per-firm breach rate, or using the enterprise IBM financial-services average as an expected mid-market loss.",
+      "sources": [
+        {
+          "parameter": "impact.min",
+          "name": "NetDiligence Cyber Claims Study 2025 (Fifteenth Annual)",
+          "url": "https://netdiligence.com/cyber-claims-study-2025-report/",
+          "confidence": "medium",
+          "limitation": "Insured-claim crisis-services subset; not full total loss; SME band is broad (under USD 2B revenue) and not isolated to financial services."
+        },
+        {
+          "parameter": "impact.likely",
+          "name": "NetDiligence Cyber Claims Study 2025 (Fifteenth Annual)",
+          "url": "https://netdiligence.com/cyber-claims-study-2025-report/",
+          "confidence": "medium",
+          "limitation": "Insured-claim sample: covers claims of USD 1K or more that reached an insurer, so it excludes uninsured, self-absorbed and unreported losses, and is censored by policy limits and self-insured retentions. The SME band spans revenue up to USD 2B even though the financial-services sample averages USD 113M. Pooled 2020-2024 in nominal dollars with no inflation adjustment. RiskShard's mid_market band is defined by headcount while this segmentation is by revenue - the mapping is an explicit assumption, not a measurement."
+        },
+        {
+          "parameter": "impact.max",
+          "name": "NetDiligence Cyber Claims Study 2025 (Fifteenth Annual)",
+          "url": "https://netdiligence.com/cyber-claims-study-2025-report/",
+          "confidence": "medium",
+          "limitation": "A single observed claim, not a modelled percentile - it is the maximum of 579 claims over five years, so it says nothing about how much worse a loss could be, and a larger sample would likely show a larger maximum. Insured-claim basis, so it is censored by policy limits and excludes uninsured or unreported losses. The SME band spans revenue up to USD 2B. Nominal 2020-2024 dollars, not inflation-adjusted."
+        }
+      ]
+    }
+  ]
+}

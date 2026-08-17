@@ -1,0 +1,8 @@
+{
+  "name": "sample-app",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.30.0",
+    "openai": "^4.60.0",
+    "express": "^4.19.2"
+  }
+}

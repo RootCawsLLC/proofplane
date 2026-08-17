@@ -1,0 +1,388 @@
+{
+  "schema": "proofplane.exposure/v1",
+  "currency": "USD",
+  "iterations": 20000,
+  "seed": 20260810,
+  "configuration": "guarded",
+  "evidence": {
+    "run_id": "31925493192-guarded",
+    "recorded_at": "2026-01-01T00:00:00Z",
+    "head_hash": "6ba1669ddf065cf385af34e24b3198ba966e004f3b1724e38fcb5d6f8fa4f877",
+    "model": {
+      "provider": "mock",
+      "id": "proofplane-mock-0.1.0",
+      "pinned": true
+    },
+    "from_live_model": false,
+    "holding": [
+      "PP-C001",
+      "PP-C002",
+      "PP-C003",
+      "PP-C004",
+      "PP-C005",
+      "PP-C006",
+      "PP-C007",
+      "PP-C008",
+      "PP-C009",
+      "PP-C010",
+      "PP-C011",
+      "PP-C012"
+    ],
+    "breached": [],
+    "unassessed": []
+  },
+  "inherent": {
+    "mean": 7904159.59016783,
+    "p50": 7603103.622027446,
+    "p90": 11615396.007937673,
+    "p99": 15706566.275778878,
+    "max": 25382719.951123957,
+    "quietYears": 0
+  },
+  "residual": {
+    "mean": 456158.6966944872,
+    "p50": 354356.4661421629,
+    "p90": 898232.680000895,
+    "p99": 1850990.7859858444,
+    "max": 3962558.9349738774,
+    "quietYears": 0.00005
+  },
+  "difference": 7448000.893473343,
+  "scenarios": [
+    {
+      "id": "S-01",
+      "title": "Fraudulent refund driven by indirect prompt injection",
+      "inherent": {
+        "mean": 352988.12875451817,
+        "p50": 320865.6687935708,
+        "p90": 635465.9792412545,
+        "p99": 865329.0798087809,
+        "max": 1194056.2088069683,
+        "quietYears": 0.0004
+      },
+      "residual": {
+        "mean": 2541.2338810247757,
+        "p50": 0,
+        "p90": 7816.995012256128,
+        "p99": 17752.503979080095,
+        "max": 46521.42455351176,
+        "quietYears": 0.51035
+      },
+      "credited": [
+        "PP-C001",
+        "PP-C002",
+        "PP-C007",
+        "PP-C011"
+      ],
+      "uncredited": []
+    },
+    {
+      "id": "S-02",
+      "title": "Cross-tenant record disclosure",
+      "inherent": {
+        "mean": 1924111.6054097763,
+        "p50": 1646667.5336258216,
+        "p90": 3945226.736382787,
+        "p99": 6331677.601940076,
+        "max": 10770941.264052067,
+        "quietYears": 0.0696
+      },
+      "residual": {
+        "mean": 44422.138396791524,
+        "p50": 0,
+        "p90": 0,
+        "p99": 877320.3075744943,
+        "max": 2050696.3944354155,
+        "quietYears": 0.91075
+      },
+      "credited": [
+        "PP-C003",
+        "PP-C008"
+      ],
+      "uncredited": []
+    },
+    {
+      "id": "S-03",
+      "title": "Sensitive identifier disclosed to an entitled caller",
+      "inherent": {
+        "mean": 731651.6964452952,
+        "p50": 673888.0821752587,
+        "p90": 1300077.4099276809,
+        "p99": 1679639.4650835812,
+        "max": 2050625.17807616,
+        "quietYears": 0
+      },
+      "residual": {
+        "mean": 92608.43373938145,
+        "p50": 76562.45805392518,
+        "p90": 188561.29818448037,
+        "p99": 313889.21166501864,
+        "max": 535525.6050334433,
+        "quietYears": 0.0165
+      },
+      "credited": [
+        "PP-C004"
+      ],
+      "uncredited": []
+    },
+    {
+      "id": "S-04",
+      "title": "Data exfiltrated to an attacker-controlled destination",
+      "inherent": {
+        "mean": 2484580.1776594953,
+        "p50": 2069679.3359392213,
+        "p90": 5369113.444782296,
+        "p99": 8708788.36834339,
+        "max": 17292864.261711445,
+        "quietYears": 0.10705
+      },
+      "residual": {
+        "mean": 56254.63119017744,
+        "p50": 0,
+        "p90": 0,
+        "p99": 1369319.6790835103,
+        "max": 3709075.1962149753,
+        "quietYears": 0.93225
+      },
+      "credited": [
+        "PP-C010",
+        "PP-C001"
+      ],
+      "uncredited": []
+    },
+    {
+      "id": "S-05",
+      "title": "Incident that cannot be reconstructed",
+      "inherent": {
+        "mean": 977349.3992791777,
+        "p50": 831392.7479385816,
+        "p90": 2044190.474203605,
+        "p99": 3311293.132654409,
+        "max": 5616344.5661932025,
+        "quietYears": 0.10365
+      },
+      "residual": {
+        "mean": 124155.72555397644,
+        "p50": 92589.21423082249,
+        "p90": 277467.0915319125,
+        "p99": 546919.8221129116,
+        "max": 977867.8861629488,
+        "quietYears": 0.10095
+      },
+      "credited": [
+        "PP-C005",
+        "PP-C009"
+      ],
+      "uncredited": []
+    },
+    {
+      "id": "S-06",
+      "title": "Assurance invalidated by a silent model change",
+      "inherent": {
+        "mean": 851584.0212907869,
+        "p50": 773100.4633110357,
+        "p90": 1585380.0375476338,
+        "p99": 2372211.053657891,
+        "max": 3617401.074125246,
+        "quietYears": 0.0208
+      },
+      "residual": {
+        "mean": 82770.92364921335,
+        "p50": 0,
+        "p90": 284399.1109007327,
+        "p99": 583541.0524330743,
+        "max": 1189987.8272644293,
+        "quietYears": 0.6033
+      },
+      "credited": [
+        "PP-C006"
+      ],
+      "uncredited": []
+    },
+    {
+      "id": "S-07",
+      "title": "Authorisation repudiated after the fact",
+      "inherent": {
+        "mean": 468781.1825300128,
+        "p50": 370708.21779643075,
+        "p90": 1086174.8920497415,
+        "p99": 1887307.071841155,
+        "max": 3545601.2508661277,
+        "quietYears": 0.20245
+      },
+      "residual": {
+        "mean": 21285.43581424487,
+        "p50": 0,
+        "p90": 0,
+        "p99": 434862.2115737755,
+        "max": 1017682.7261779536,
+        "quietYears": 0.914
+      },
+      "credited": [
+        "PP-C009"
+      ],
+      "uncredited": []
+    },
+    {
+      "id": "S-08",
+      "title": "System prompt disclosed, enabling a later attack",
+      "inherent": {
+        "mean": 113113.37879881375,
+        "p50": 104208.24468204172,
+        "p90": 197305.76557066725,
+        "p99": 269514.9900340951,
+        "max": 381693.6236284715,
+        "quietYears": 0.0002
+      },
+      "residual": {
+        "mean": 32120.174469676804,
+        "p50": 27505.5191733522,
+        "p90": 63440.379790627005,
+        "p99": 103665.76622871707,
+        "max": 195326.4395897798,
+        "quietYears": 0.0224
+      },
+      "credited": [
+        "PP-C012"
+      ],
+      "uncredited": []
+    }
+  ],
+  "control_values": [
+    {
+      "controlId": "PP-C006",
+      "withControl": 456158.6966944872,
+      "withoutControl": 1220407.9318099911,
+      "annualValue": 764249.2351155039,
+      "p90WithControl": 898232.680000895,
+      "p90WithoutControl": 2072792.6354004985,
+      "scenariosAffected": [
+        "S-06"
+      ]
+    },
+    {
+      "controlId": "PP-C003",
+      "withControl": 456158.6966944872,
+      "withoutControl": 1212250.389648398,
+      "annualValue": 756091.6929539107,
+      "p90WithControl": 898232.680000895,
+      "p90WithoutControl": 2446674.1207102286,
+      "scenariosAffected": [
+        "S-02"
+      ]
+    },
+    {
+      "controlId": "PP-C010",
+      "withControl": 456158.6966944872,
+      "withoutControl": 1108116.3480580323,
+      "annualValue": 651957.6513635451,
+      "p90WithControl": 898232.680000895,
+      "p90WithoutControl": 2464271.0078177257,
+      "scenariosAffected": [
+        "S-04"
+      ]
+    },
+    {
+      "controlId": "PP-C004",
+      "withControl": 456158.6966944872,
+      "withoutControl": 1084241.6466535237,
+      "annualValue": 628082.9499590364,
+      "p90WithControl": 898232.680000895,
+      "p90WithoutControl": 1777312.557212869,
+      "scenariosAffected": [
+        "S-03"
+      ]
+    },
+    {
+      "controlId": "PP-C009",
+      "withControl": 456158.6966944872,
+      "withoutControl": 974742.8443861823,
+      "annualValue": 518584.1476916951,
+      "p90WithControl": 898232.680000895,
+      "p90WithoutControl": 1765383.5139673746,
+      "scenariosAffected": [
+        "S-05",
+        "S-07"
+      ]
+    },
+    {
+      "controlId": "PP-C005",
+      "withControl": 456158.6966944872,
+      "withoutControl": 952560.4055835833,
+      "annualValue": 496401.7088890961,
+      "p90WithControl": 898232.680000895,
+      "p90WithoutControl": 1781458.544392463,
+      "scenariosAffected": [
+        "S-05"
+      ]
+    },
+    {
+      "controlId": "PP-C001",
+      "withControl": 456158.6966944872,
+      "withoutControl": 568099.7239586238,
+      "annualValue": 111941.02726413665,
+      "p90WithControl": 898232.680000895,
+      "p90WithoutControl": 1187297.6059357135,
+      "scenariosAffected": [
+        "S-01",
+        "S-04"
+      ]
+    },
+    {
+      "controlId": "PP-C012",
+      "withControl": 456158.6966944872,
+      "withoutControl": 530528.8189673986,
+      "annualValue": 74370.12227291142,
+      "p90WithControl": 898232.680000895,
+      "p90WithoutControl": 973381.7027145849,
+      "scenariosAffected": [
+        "S-08"
+      ]
+    },
+    {
+      "controlId": "PP-C008",
+      "withControl": 456158.6966944872,
+      "withoutControl": 492829.3388712827,
+      "annualValue": 36670.64217679552,
+      "p90WithControl": 898232.680000895,
+      "p90WithoutControl": 1006053.2406079674,
+      "scenariosAffected": [
+        "S-02"
+      ]
+    },
+    {
+      "controlId": "PP-C007",
+      "withControl": 456158.6966944872,
+      "withoutControl": 464580.72166501323,
+      "annualValue": 8422.02497052605,
+      "p90WithControl": 898232.680000895,
+      "p90WithoutControl": 906740.339527081,
+      "scenariosAffected": [
+        "S-01"
+      ]
+    },
+    {
+      "controlId": "PP-C011",
+      "withControl": 456158.6966944872,
+      "withoutControl": 457994.61547336314,
+      "annualValue": 1835.918778875959,
+      "p90WithControl": 898232.680000895,
+      "p90WithoutControl": 901518.4101659348,
+      "scenariosAffected": [
+        "S-01"
+      ]
+    },
+    {
+      "controlId": "PP-C002",
+      "withControl": 456158.6966944872,
+      "withoutControl": 457566.7324029016,
+      "annualValue": 1408.0357084143907,
+      "p90WithControl": 898232.680000895,
+      "p90WithoutControl": 899134.9290256706,
+      "scenariosAffected": [
+        "S-01"
+      ]
+    }
+  ],
+  "caveat": "Control-effectiveness figures are judgments carried as three-point estimates. Frequency and magnitude are anchored on generic breach-cost reporting, not AI-specific incident data. Control values are counterfactual and do not sum to the difference."
+}
