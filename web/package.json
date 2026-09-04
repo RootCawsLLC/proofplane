@@ -1,0 +1,25 @@
+{
+  "name": "proofplane-web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Hosted demo GUI for proofplane. Boots the real target server(s) and runs the real adversarial probe suite against them out-of-process, then shows which controls held, the attack that was executed against each, the evidence, the 12x12 independence matrix, and the FAIR loss the run priced.",
+  "scripts": {
+    "dev": "next dev -p 3300",
+    "build": "next build",
+    "start": "next start -p 3300",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^15.5.25",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "server-only": "0.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.14.9",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "typescript": "5.5.3"
+  }
+}
