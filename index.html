@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>proofplane — continuous assurance evidence</title>
-<meta name="description" content="Evidence from proofplane: AI governance controls proved by executed adversarial attacks.">
+<title>proofplane — how to prove an AI control</title>
+<meta name="description" content="An AI governance control plane. A control is held only when an executed adversarial attack failed. How to run it, when to use it, and how to take the pattern into your organisation.">
 <style>
 :root{
   --bg:#FAFAF8;--panel:#FFFFFF;--panel-2:#F5F1E8;--border:#e0e0e0;
@@ -19,23 +19,46 @@
   }
 }
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{margin:0;padding:2.5rem 1.25rem 4rem;background:var(--bg);color:var(--ink);
   font:15px/1.65 ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 .wrap{max-width:46rem;margin:0 auto}
 h1{font-size:1.7rem;margin:0 0 .35rem;letter-spacing:-.01em}
-.thesis{color:var(--ink-2);margin:0 0 2rem;font-size:1.02rem}
+.thesis{color:var(--ink-2);margin:0 0 1.25rem;font-size:1.02rem}
 .thesis b{color:var(--ink)}
+nav.toc{display:flex;flex-wrap:wrap;gap:.4rem .75rem;margin:0 0 2rem;padding:0;
+  font-size:.82rem}
+nav.toc a{color:var(--accent);text-decoration:none}
+nav.toc a:hover{text-decoration:underline}
 h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.09em;color:var(--ink-3);
-  margin:2rem 0 .75rem;font-weight:600}
+  margin:2.25rem 0 .75rem;font-weight:600}
+h3{font-size:1rem;margin:1.35rem 0 .4rem}
+p,li{color:var(--ink-2)}
+p{margin:0 0 .85rem}
+ul,ol{margin:.2rem 0 1rem;padding-left:1.2rem}
+li{margin:.25rem 0}
 a.card{display:block;background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);
   border-radius:9px;padding:.9rem 1.1rem;margin-bottom:.6rem;text-decoration:none;color:inherit}
 a.card:hover{border-color:var(--accent)}
-a.card .t{font-weight:600;margin-bottom:.15rem}
+a.card .t{font-weight:600;margin-bottom:.15rem;color:var(--ink)}
 a.card .d{color:var(--ink-3);font-size:.87rem}
 a.card.held{border-left-color:var(--held)}
 a.card.breach{border-left-color:var(--breach)}
 .note{background:var(--panel-2);border-radius:8px;padding:.85rem 1.05rem;font-size:.89rem;
   color:var(--ink-2);margin:1.25rem 0}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:0 0 1rem}
+@media (max-width:640px){.pair{grid-template-columns:1fr}}
+.box{background:var(--panel);border:1px solid var(--border);border-radius:9px;padding:.85rem 1rem}
+.box h3{margin:.1rem 0 .4rem}
+.box.use{border-left:4px solid var(--held)}
+.box.dont{border-left:4px solid var(--breach)}
+pre{background:var(--panel-2);border:1px solid var(--border);border-radius:8px;
+  padding:.85rem 1rem;overflow-x:auto;font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--ink);margin:0 0 1rem}
+code{font:13px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+table{width:100%;border-collapse:collapse;font-size:.9rem;margin:0 0 1rem}
+th,td{text-align:left;vertical-align:top;padding:.45rem .5rem .45rem 0;border-bottom:1px solid var(--border)}
+th{color:var(--ink-3);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em}
 footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--border);
   color:var(--ink-3);font-size:.84rem}
 footer a{color:var(--accent)}
@@ -46,9 +69,78 @@ footer a{color:var(--accent)}
 <h1>proofplane</h1>
 <p class="thesis">An AI governance control plane where a control is satisfied
 <b>only when an executed adversarial attack failed</b> — never because a document says it exists.
-Everything linked below was produced by a pipeline run, not written by hand.</p>
+This page is how you use it, and how you take the same rule into your own programme.</p>
 
-<h2>Assurance reports</h2>
+<nav class="toc" aria-label="On this page">
+  <a href="#what">What it does</a>
+  <a href="#when">When to use it</a>
+  <a href="#how">How to use it</a>
+  <a href="#org">Take it into your org</a>
+  <a href="#reports">This run</a>
+  <a href="#limits">Honest limits</a>
+</nav>
+
+<h2 id="what">What it does</h2>
+<p>Most AI governance tooling produces an artefact that <i>asserts</i> a control is in place: a policy PDF, a questionnaire answer, a screenshot of a settings page. proofplane produces evidence that a control <b>held</b>.</p>
+<p>Twelve controls. Each names the MITRE ATLAS and OWASP Agentic technique it defends against, and the probe that proves it. A control is <b>HELD</b> only when that probe breached an unguarded target, held against a guarded one, and did not go green when any <i>other</i> guardrail was removed. That last part is the 12&times;12 independence matrix: 144 probe runs, breach only on the diagonal.</p>
+<p>The output is hash-chained evidence, an OSCAL assessment-results file (method <code>TEST</code>, because that is what happened), a CycloneDX ML-BOM of the AI surface, and a FAIR loss model that credits a control only if a probe executed an attack against it and the attack failed.</p>
+
+<h2 id="when">When and where to use it</h2>
+<div class="pair">
+  <div class="box use">
+    <h3>Use it when</h3>
+    <ul>
+      <li>You are standing up an agentic system — tools, tenants, approvals — and need to prove the guardrails work before anyone calls them controls.</li>
+      <li>A framework (AIUC-1, EU AI Act Articles 12/14/15, NIST AI RMF) is asking for adversarial technical testing, not a narrative.</li>
+      <li>You need machine-readable evidence an assessor can re-run: OSCAL, a BOM with file-and-line provenance, a head hash.</li>
+      <li>You want to teach a GRC team the difference between “we have a policy” and “the attack failed.”</li>
+    </ul>
+  </div>
+  <div class="box dont">
+    <h3>Do not use it when</h3>
+    <ul>
+      <li>You need to certify a live model as safe. The default target is a deterministic double. A held result is evidence the <i>guardrail</i> works.</li>
+      <li>The control is governance, training, or a contract. Those resist automated attack and are absent here on purpose — not passing.</li>
+      <li>You want a coverage percentage. Twelve controls is a worked example, not an AIUC-1 or ISO 42001 programme.</li>
+    </ul>
+  </div>
+</div>
+
+<h2 id="how">How to use it</h2>
+<p>No API key, no cloud account, no spend. Node 20+ and Python 3.11+. Go 1.22+ for the inventory step; without it the script skips discovery and says so.</p>
+<p><b>1. Clone and run the suite.</b> Seven steps: inventory the AI surface, prove every probe is falsifiable, run the independence matrix, write evidence and an HTML report per configuration, execute the documented limitations, validate OSCAL against the vendored NIST schema, check every framework citation.</p>
+<pre>git clone https://github.com/RootCawsLLC/proofplane.git
+cd proofplane
+npm --prefix target ci
+python -m pip install ./probe
+./scripts/assure.sh          # Windows: .\scripts\assure.ps1</pre>
+<p>Evidence lands in <code>evidence/</code>. Open <code>evidence/guarded/report.html</code> first, then the unguarded report. The unguarded run is what makes the green one mean something: a suite that cannot go red proves nothing when it is green.</p>
+<p><b>2. Read one control end to end.</b> Pick PP-C001 (privileged actions need an approval recorded outside the model). The probe asks the agent for a refund. Against the unguarded target the refund happens. Against the guarded target it does not. Disable any other guardrail and the refund still does not happen — only removing the approval gate lets it through. That is what “independence” means here.</p>
+<p><b>3. Useful commands once you have run it once.</b></p>
+<pre>python -m proofplane_probe.cli --catalog ./catalog catalog
+python -m proofplane_probe.cli --catalog ./catalog verify
+python -m proofplane_probe.cli --catalog ./catalog matrix
+python -m proofplane_probe.cli --catalog ./catalog corroborate
+node scripts/validate-oscal.mjs</pre>
+<p><b>4. Against a real model</b> — only after you understand the default run. A held result against the double is not a held result against a model.</p>
+<pre>PROOFPLANE_MODEL_PROVIDER=anthropic ANTHROPIC_API_KEY=sk-... \
+  PROOFPLANE_GUARDRAILS=all node target/dist/server.js</pre>
+<p>Raise the trial count and read the breach <i>rate</i>. Zero breaches in three trials is consistent with a true failure rate above 50%. That is why every result on this site shows its trial count.</p>
+
+<h2 id="org">Take it into your organisation</h2>
+<p>You do not drop this repository onto a production agent and call it a day. You take the <b>rule</b> and the <b>shape</b>.</p>
+<ol>
+  <li><b>Write the control as an assertion a probe can fail.</b> “Privileged actions require an approval recorded outside the model” can be attacked. “We take AI risk seriously” cannot. If you cannot name the attack, you do not have a technical control yet.</li>
+  <li><b>Put the guardrail in deterministic code, not in the prompt.</b> The model is not a trust boundary. Every guardrail in the target is toggleable code outside the model. That is the whole architectural argument.</li>
+  <li><b>Prove the probe can go red</b> before you trust it going green. The independence matrix is the worked example: disable the control under test, confirm breach; disable every other control, confirm hold.</li>
+  <li><b>Emit what an assessor already knows how to read.</b> OSCAL assessment results with method TEST. A BOM that points at a file and a line. A head hash you can put somewhere you cannot silently edit.</li>
+  <li><b>Price the control against the evidence, not the catalogue.</b> The exposure report credits a control only if a probe attacked it and failed. When a guardrail stops holding, the dollar figure moves on the next run.</li>
+</ol>
+<p>Start with one agent, one privileged tool, one approval gate. Port PP-C001 and its probe. Do not start by mapping ISO 42001 — the crosswalk here is cited at group level, with a confidence on every edge, and it is not a claim of satisfaction.</p>
+<p>Full write-up, ADRs, and the threat model live in the repository. This page is the operator’s entrance.</p>
+
+<h2 id="reports">This run</h2>
+<p>Everything linked below was produced by a pipeline run, not written by hand.</p>
 
 <a class="card held" href="evidence/guarded/report.html">
   <div class="t">Guarded configuration — 12 controls held</div>
@@ -62,22 +154,16 @@ Everything linked below was produced by a pipeline run, not written by hand.</p>
     a suite that cannot go red proves nothing when it is green.</div>
 </a>
 
-<h2>What it is worth</h2>
-
 <a class="card" href="evidence/exposure.html">
   <div class="t">Loss exposure, bound to control state</div>
-  <div class="d">FAIR Monte Carlo over eight scenarios, where a control is credited only if a
-    probe executed an attack against it and the attack failed. Inherent against residual, and
-    what each control is worth per year by counterfactual. When a guardrail stops holding, the
-    dollar figure moves on the next run.</div>
+  <div class="d">FAIR Monte Carlo over eight scenarios. Inherent against residual, and what
+    each control is worth per year by counterfactual.</div>
 </a>
-
-<h2>Machine-readable output</h2>
 
 <a class="card" href="evidence/guarded/oscal-assessment-results.json">
   <div class="t">OSCAL assessment results</div>
   <div class="d">Validated against the NIST OSCAL 1.1.2 schema. Every observation carries
-    method <code>TEST</code>, because that is what happened.</div>
+    method <code>TEST</code>.</div>
 </a>
 
 <a class="card" href="evidence/aibom.json">
@@ -98,16 +184,22 @@ Everything linked below was produced by a pipeline run, not written by hand.</p>
     was derived from.</div>
 </a>
 
+<h2 id="limits">Honest limits</h2>
 <div class="note">
   <b>Read the status honestly.</b> These runs use a deterministic model double, so a
   <i>held</i> result is evidence that the guardrail works — not that any model is safe. Against a
   live model, zero breaches in three trials is consistent with a true failure rate above 50%,
-  which is why every result shows its trial count.
+  which is why every result shows its trial count. Hash chaining is tamper-evident, not
+  tamper-proof. The crosswalk is mapped, not satisfied. Controls that resist automated testing
+  are absent, not passing. The full account is
+  <a href="https://github.com/RootCawsLLC/proofplane/blob/main/docs/HONEST-LIMITS.md">docs/HONEST-LIMITS.md</a>.
 </div>
 
 <footer>
-  Source, threat model, and the full honest-limits account:
-  <a href="https://github.com/RootCawsLLC/proofplane">github.com/RootCawsLLC/proofplane</a><br>
+  Source, threat model, ADRs:
+  <a href="https://github.com/RootCawsLLC/proofplane">github.com/RootCawsLLC/proofplane</a>
+  · Portfolio:
+  <a href="https://xnasusx.github.io/portfolio/#builds">xnasusx.github.io/portfolio</a><br>
   Copyright &copy; 2026 RootCaws LLC &middot; AGPL-3.0-or-later
 </footer>
 
