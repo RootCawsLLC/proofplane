@@ -7,7 +7,7 @@ failed** — never because a document says it exists.
 organisation: https://rootcawsllc.github.io/proofplane/
 
 **Run it in your browser** — a hosted demo that executes the real adversarial probes against a
-sandboxed agent, no install: @@GUI_URL@@
+sandboxed agent, no install: https://brmuyw6npp.us-east-2.awsapprunner.com
 
 Most AI governance tooling produces an artefact that *asserts* a control is in place: a policy
 PDF, a questionnaire answer, a screenshot of a settings page. This produces evidence that a
