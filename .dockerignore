@@ -1,0 +1,16 @@
+**/node_modules
+**/.next
+**/dist
+**/*.tsbuildinfo
+.git
+**/*.log
+.venv
+.venv-test
+venv
+**/__pycache__
+**/*.egg-info
+probe/build
+web/.env*.local
+source.zip
+evidence
+infra-web
