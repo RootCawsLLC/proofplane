@@ -3,6 +3,9 @@
 An AI governance control plane where a control is satisfied **only when an executed attack
 failed** — never because a document says it exists.
 
+**Live guide** — what it does, when to use it, how to run it, how to take the pattern into an
+organisation: https://rootcawsllc.github.io/proofplane/
+
 Most AI governance tooling produces an artefact that *asserts* a control is in place: a policy
 PDF, a questionnaire answer, a screenshot of a settings page. This produces evidence that a
 control **held**. Every status traces back to an adversarial probe that ran against a live
