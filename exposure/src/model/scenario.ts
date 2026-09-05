@@ -64,7 +64,7 @@ export interface ScenarioFile {
  * Residual factors are multiplied, which assumes the controls fail independently. They do not:
  * the same attacker, the same deployment mistake, and the same bad afternoon defeat several at
  * once. Multiplying unbounded would let five mediocre controls sum to near-certainty, which is
- * the arithmetic that makes defence-in-depth diagrams look better than they are.
+ * the arithmetic that makes defense-in-depth diagrams look better than they are.
  *
  * The cap is a blunt correction and does not make the independence assumption true. It bounds
  * how wrong it gets. Stated in docs/HONEST-LIMITS.md rather than buried here.

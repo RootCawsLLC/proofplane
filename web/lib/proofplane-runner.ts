@@ -4,7 +4,7 @@
  * It does NOT reimplement or import the tool into the Next bundle. It spawns a plain Node ESM
  * process (scripts/run-assure.mjs) that boots the shipped target server and runs the shipped
  * Python probe suite (and the exposure CLI) against it, then relays that process's JSON result.
- * Running out-of-process keeps the tool's child-process and filesystem behaviour identical to
+ * Running out-of-process keeps the tool's child-process and filesystem behavior identical to
  * the CLI and isolates the (server-spawning, Python-spawning) run from the web server.
  */
 import 'server-only';

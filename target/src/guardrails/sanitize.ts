@@ -6,9 +6,9 @@
  *   1. Spotlighting — wrap untrusted spans in an explicit delimiter that marks them as data.
  *   2. Directive stripping — remove clauses that name a tool or issue an override instruction.
  *
- * This is defence in depth and nothing more. Content-layer defences against indirect prompt
+ * This is defense in depth and nothing more. Content-layer defenses against indirect prompt
  * injection are defeatable by obfuscation, encoding, translation, and phrasings nobody has
- * written a pattern for yet. PP-C002 raises cost. PP-C001 — the authorisation gate — is what
+ * written a pattern for yet. PP-C002 raises cost. PP-C001 — the authorization gate — is what
  * actually prevents the loss event. The two are separate controls so that a bypass of this one
  * does not silently become a compromise of the system. See docs/THREAT-MODEL.md.
  */
@@ -53,7 +53,7 @@ export function stripDirectives(text: string): SanitizeResult {
 /**
  * Wrap a span of untrusted content so its provenance survives into the context window.
  * The delimiter is not a security boundary on its own — a model can be talked past it — which
- * is precisely why the authorisation gate exists downstream.
+ * is precisely why the authorization gate exists downstream.
  */
 export function spotlight(source: string, body: string): string {
   return [

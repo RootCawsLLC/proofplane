@@ -2,7 +2,7 @@
 
 The system prompt in the target ends by asking the model not to disclose it. That line is
 addressed to the same undifferentiated context an attacker writes into, and including it makes
-the disclosed text one line longer. The probe checks whether the request is honoured, not
+the disclosed text one line longer. The probe checks whether the request is honored, not
 whether the instruction is present.
 """
 

@@ -28,7 +28,7 @@ export interface BenchmarkLossType {
   readonly lossType: string;
   readonly benchmarkId: string;
   readonly label: string;
-  /** Why this published population is the nearest analogue to the modelled loss. */
+  /** Why this published population is the nearest analogue to the modeled loss. */
   readonly why: string;
   readonly currency: string;
   readonly magnitude: { readonly min: number; readonly likely: number; readonly max: number };

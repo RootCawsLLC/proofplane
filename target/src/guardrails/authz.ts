@@ -2,7 +2,7 @@
  * Guardrail G1 — approval gate on privileged tool calls (control PP-C001).
  * Guardrail G3 — tenant scoping on data tools (control PP-C003).
  *
- * The design point worth arguing in a review: the authorisation decision has no access to the
+ * The design point worth arguing in a review: the authorization decision has no access to the
  * model's reasoning, its confidence, or the text of the request. It sees a tool name, a tenant,
  * and arguments. There is nothing here for a prompt to talk to. That is what makes it a control
  * rather than a mitigation.

@@ -74,7 +74,7 @@ export function buildAibom(cfg: Config): Record<string, unknown> {
               {
                 name: 'Indirect prompt injection',
                 mitigationStrategy:
-                  'Authorisation gate on privileged tools (PP-C001); content sanitisation (PP-C002).',
+                  'Authorization gate on privileged tools (PP-C001); content sanitisation (PP-C002).',
               },
             ],
           },

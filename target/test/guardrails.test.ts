@@ -79,7 +79,7 @@ describe('G5 audit chain', () => {
   });
 });
 
-describe('G1 authorisation', () => {
+describe('G1 authorization', () => {
   it('an approved effect is attributable to an operator, an unapproved one is not', () => {
     const ledger = new Ledger();
     const request = ledger.requestApproval('issue_refund', 'acme', { amount: '10' });
@@ -101,7 +101,7 @@ describe('G1 authorisation', () => {
 });
 
 describe('G6 model pinning', () => {
-  it('recognises moving aliases', () => {
+  it('recognizes moving aliases', () => {
     expect(isPinned('proofplane-mock-latest')).toBe(false);
     expect(isPinned('some-model-stable')).toBe(false);
     expect(isPinned('proofplane-mock-0.1.0')).toBe(true);

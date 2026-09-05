@@ -11,7 +11,7 @@ import { Repo } from '../core/repo.js';
 import { TOOLS, findTool, type Context } from '../tools/index.js';
 
 /**
- * MCP server exposing the assurance programme to an agent.
+ * MCP server exposing the assurance program to an agent.
  *
  * Every tool invocation is wrapped in `underModelAuthority`. Anything reached from inside that
  * wrapper — at any call depth — that tries to perform an operation carrying a compliance

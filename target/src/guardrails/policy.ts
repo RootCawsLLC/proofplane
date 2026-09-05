@@ -13,7 +13,7 @@ import type { ToolCall } from '../tools.js';
  * These run BEFORE the approval gate (G1), and the ordering is load-bearing rather than
  * incidental. A request that violates policy must be refused outright, not queued for a human
  * to rubber-stamp. Putting a human in front of a request the system already knows is invalid
- * converts a deterministic refusal into a judgement call, and judgement under volume is how
+ * converts a deterministic refusal into a judgment call, and judgment under volume is how
  * approval fatigue starts.
  *
  * It is also what makes the probes independent: with the approval gate on and one of these off,

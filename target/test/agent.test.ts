@@ -27,7 +27,7 @@ describe('indirect prompt injection', () => {
     d.store.tickets.push(makeTicket('acme', 'acct_acme_001', 'Refund', INJECTION));
 
     const result = await runAgent(
-      { tenantId: 'acme', userEmail: 'dana.whitfield@acme.test', message: 'Summarise my tickets.' },
+      { tenantId: 'acme', userEmail: 'dana.whitfield@acme.test', message: 'Summarize my tickets.' },
       d,
     );
 
@@ -43,7 +43,7 @@ describe('indirect prompt injection', () => {
     d.store.tickets.push(makeTicket('acme', 'acct_acme_001', 'Refund', INJECTION));
 
     const result = await runAgent(
-      { tenantId: 'acme', userEmail: 'dana.whitfield@acme.test', message: 'Summarise my tickets.' },
+      { tenantId: 'acme', userEmail: 'dana.whitfield@acme.test', message: 'Summarize my tickets.' },
       d,
     );
 
@@ -51,13 +51,13 @@ describe('indirect prompt injection', () => {
   });
 
   it('still causes no side effect when G2 is off but G1 is on', async () => {
-    // The layering claim in docs/THREAT-MODEL.md: sanitisation is depth, authorisation is the
+    // The layering claim in docs/THREAT-MODEL.md: sanitisation is depth, authorization is the
     // control. This test is what makes that claim checkable rather than rhetorical.
     const d = deps(['G1']);
     d.store.tickets.push(makeTicket('acme', 'acct_acme_001', 'Refund', INJECTION));
 
     const result = await runAgent(
-      { tenantId: 'acme', userEmail: 'dana.whitfield@acme.test', message: 'Summarise my tickets.' },
+      { tenantId: 'acme', userEmail: 'dana.whitfield@acme.test', message: 'Summarize my tickets.' },
       d,
     );
 
