@@ -153,7 +153,7 @@ function crossCheckSection(
 </div>
 <div class="scroll"><table>
   <thead><tr>
-    <th>ID</th><th>Scenario</th><th class="num">Modelled magnitude (mode)</th>
+    <th>ID</th><th>Scenario</th><th class="num">Modeled magnitude (mode)</th>
     <th class="num">Published band (min → central → max)</th><th>Position</th>
   </tr></thead>
   <tbody>${rows}</tbody>
@@ -339,7 +339,7 @@ ${crossCheckSection(input.scenarios, input.benchmarks)}
   reaches the answer rather than being hidden by a tidy percentage. Frequency and magnitude are
   anchored on generic breach-cost reporting, not AI-specific incident data, because that data is
   thin and mostly unpublished. Replace all of it with calibrated estimates before any figure here
-  means anything about your organisation.
+  means anything about your organization.
 </div>
 
 <footer>

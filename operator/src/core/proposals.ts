@@ -7,13 +7,13 @@ import { canonical } from './repo.js';
 /**
  * The proposal queue.
  *
- * This is the only path by which anything a model produced can affect the assurance programme,
+ * This is the only path by which anything a model produced can affect the assurance program,
  * and it is one-way: a model may add to the queue, and nothing else. Approving is a human
  * action taken outside any model context, enforced by `assertHumanAuthority` rather than by
  * asking people to be careful.
  *
  * The shape is deliberately the same as PP-C001's approval gate in the target. That control says
- * a model may request a consequential action but must not authorise one; this repository would
+ * a model may request a consequential action but must not authorize one; this repository would
  * be worth very little if it audited for that property and did not have it.
  */
 

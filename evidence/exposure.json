@@ -7,7 +7,7 @@
   "evidence": {
     "run_id": "33833288388-guarded",
     "recorded_at": "2026-01-01T00:00:00Z",
-    "head_hash": "3107df783408cedf18fab0eb9643db0b8f378bf21595d96e7281b5e62cdb9931",
+    "head_hash": "4be0741385ee0afd0ac0435b4f7a5cf454d4d5e2ce5b58762378a36b4c58cbc9",
     "model": {
       "provider": "mock",
       "id": "proofplane-mock-0.1.0",

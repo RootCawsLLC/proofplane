@@ -2,7 +2,7 @@
 
 Asserts on the approval queue as well as the ledger. A reviewer working through forty requests
 an hour is checking that a refund amount looks reasonable; they are not checking a domain. An
-out-of-tenant destination should never have been a judgement call in the first place.
+out-of-tenant destination should never have been a judgment call in the first place.
 """
 
 from __future__ import annotations

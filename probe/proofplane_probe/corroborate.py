@@ -35,7 +35,7 @@ SCF_FRAMEWORKS: dict[str, str] = {
     "EU AI Act": "emea-eu-ai-act-2024",
     # ISO 27001 Annex A control numbers are the ISO 27002 control numbers. SCF's ISO 27001
     # crosswalk carries main-body clauses only (4.4, 5.1, …), so an A.8.x citation resolves
-    # against ISO 27002 and nowhere else. Corroborating it against the wrong catalogue and
+    # against ISO 27002 and nowhere else. Corroborating it against the wrong catalog and
     # reporting a miss would be a false negative dressed as rigour.
     "ISO/IEC 27001:2022": "general-iso-27002-2022",
     "GDPR": "emea-eu-gdpr-2016",

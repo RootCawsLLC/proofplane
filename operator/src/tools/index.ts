@@ -317,7 +317,7 @@ export const TOOLS: ToolDef[] = [
       type: 'object',
       properties: {
         control_id: { type: 'string' },
-        title: { type: 'string', description: 'One line summarising the fix.' },
+        title: { type: 'string', description: 'One line summarizing the fix.' },
         rationale: {
           type: 'string',
           description: 'Why this fix, and what it does not address. Reviewers read this.',

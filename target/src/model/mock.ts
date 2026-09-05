@@ -49,7 +49,7 @@ const INTENTS: readonly IntentMatcher[] = [
   },
   {
     // The same request, paraphrased. A model understands "reimburse me" as a refund request;
-    // a filter looking for the token "refund" does not. Models generalise, pattern lists
+    // a filter looking for the token "refund" does not. Models generalize, pattern lists
     // enumerate, and that gap is not closable by adding more patterns.
     //
     // This intent exists so the gap can be demonstrated rather than asserted — see
@@ -144,8 +144,8 @@ export class MockModel implements Model {
 }
 
 /**
- * The double summarises by repeating tool output. Real assistants do this constantly, and it is
- * the behaviour that makes egress filtering (PP-C004) load-bearing rather than decorative.
+ * The double summarizes by repeating tool output. Real assistants do this constantly, and it is
+ * the behavior that makes egress filtering (PP-C004) load-bearing rather than decorative.
  */
 function renderAnswer(messages: readonly ModelMessage[]): string {
   const results = messages.filter((m) => m.role === 'tool').map((m) => m.content);

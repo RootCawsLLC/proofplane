@@ -209,14 +209,14 @@ export class Repo {
  *
  * Two rules, both load-bearing:
  *   - keys sorted, no whitespace  (Python: sort_keys=True, separators=(",", ":"))
- *   - integral floats as integers (Python normalises 1.0 to 1 before hashing)
+ *   - integral floats as integers (Python normalizes 1.0 to 1 before hashing)
  *
  * The second exists because Python writes a float of 1.0 as `1.0` and JavaScript writes it as
  * `1`. That single difference was enough to make evidence written by the probe unverifiable
  * here — caught by the cross-language test in test/repo.test.ts, which is the only reason
  * anyone should believe the chain is checkable from both sides.
  *
- * JavaScript already renders integral numbers without a decimal point, so the normalisation is
+ * JavaScript already renders integral numbers without a decimal point, so the normalization is
  * a no-op on this side. It is written out anyway: the rule belongs in both implementations,
  * not in one implementation and one language's happy accident.
  */

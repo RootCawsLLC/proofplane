@@ -37,7 +37,7 @@ def _normalise_numbers(value: Any) -> Any:
     separators match — so this single case was enough to make evidence written by the probe
     unverifiable by the operator, which would have quietly reduced "hash-chained" to a word.
 
-    Normalising here rather than in the stored JSON keeps the evidence readable as floats while
+    Normalizing here rather than in the stored JSON keeps the evidence readable as floats while
     making the hashed form language-neutral. The operator applies the same rule in
     operator/src/core/repo.ts, and a test verifies a Python-written chain from TypeScript.
     """
