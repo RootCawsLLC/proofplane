@@ -4,7 +4,7 @@ An AI governance control plane where a control is satisfied **only when an execu
 failed** — never because a document says it exists.
 
 **Live guide** — what it does, when to use it, how to run it, how to take the pattern into an
-organisation: https://rootcawsllc.github.io/proofplane/
+organization: https://rootcawsllc.github.io/proofplane/
 
 **Run it in your browser** — a hosted demo that executes the real adversarial probes against a
 sandboxed agent, no install: https://brmuyw6npp.us-east-2.awsapprunner.com
@@ -90,7 +90,7 @@ failed**. Against the guarded evidence: inherent **$7.90M**, residual **$456K**.
 unguarded evidence the difference is **$0**, because nothing held. Seeded Monte Carlo, so the
 answer is reproducible and diffable like everything else.
 
-![The proofplane exposure report. A header gives inherent loss of $7.90M against residual $456K, a $7.45M difference, and 0% quiet years, above a per-scenario table and a counterfactual value-per-control table. At the foot, a generic-loss-type cross-check states that scenarios.json anchors its magnitudes on generic breach-cost reporting rather than AI-specific data and that four of eight scenarios have a published analogue at all: four rows show the modelled magnitude against a published band and where it falls, and four are marked "no published band — nothing prices this loss type". Below that, the two bands with their sources, confidence levels and stated limitations, and the upstream commit they were vendored from](docs/images/exposure-report.png)
+![The proofplane exposure report. A header gives inherent loss of $7.90M against residual $456K, a $7.45M difference, and 0% quiet years, above a per-scenario table and a counterfactual value-per-control table. At the foot, a generic-loss-type cross-check states that scenarios.json anchors its magnitudes on generic breach-cost reporting rather than AI-specific data and that four of eight scenarios have a published analogue at all: four rows show the modeled magnitude against a published band and where it falls, and four are marked "no published band — nothing prices this loss type". Below that, the two bands with their sources, confidence levels and stated limitations, and the upstream commit they were vendored from](docs/images/exposure-report.png)
 
 The cross-check at the foot is the part worth reading twice. `scenarios.json` has always said its
 magnitudes stand in for generic breach-cost reporting because AI-specific loss data is thin and
@@ -135,10 +135,10 @@ produces exactly that refund, attributed in the trace to untrusted content, with
  "authorisedBy":"model","approvalId":null}
 ```
 
-**The interesting part is where the fix goes.** Sanitising ticket bodies (PP-C002) is defence in
+**The interesting part is where the fix goes.** Sanitising ticket bodies (PP-C002) is defense in
 depth and loses to obfuscation. The control that actually stops the loss is PP-C001 — the
-authorisation gate, which does not care what the model was persuaded of. With sanitisation off
-and authorisation on, the injected refund is still *requested* and produces *no effect*. There
+authorization gate, which does not care what the model was persuaded of. With sanitisation off
+and authorization on, the injected refund is still *requested* and produces *no effect*. There
 is a test for exactly that.
 
 ## Run it
@@ -232,7 +232,7 @@ they are good engineering, not because they are due.
 | Document | What it covers |
 | --- | --- |
 | [ARCHITECTURE.md](docs/ARCHITECTURE.md) | The loop, the assessment surface, what runs where |
-| [THREAT-MODEL.md](docs/THREAT-MODEL.md) | Adversaries, attack paths, threat-to-control coverage, what is not modelled |
+| [THREAT-MODEL.md](docs/THREAT-MODEL.md) | Adversaries, attack paths, threat-to-control coverage, what is not modeled |
 | [HONEST-LIMITS.md](docs/HONEST-LIMITS.md) | Everything above, in full |
 | [ADR 0001](docs/decisions/0001-controls-are-proved-by-executed-attacks.md) | Why a control is only satisfied by an executed attack |
 | [ADR 0002](docs/decisions/0002-deterministic-model-double.md) | Why the default model is a deterministic double |

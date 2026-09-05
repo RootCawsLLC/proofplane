@@ -45,9 +45,9 @@ shown only when `ci_meaningful` is true — that is, when a live model is servin
 ## Content sanitisation (G2) is defeatable, and is not the control
 
 `stripDirectives` is pattern-based. It loses to base64, homoglyphs, translation, indirection
-through a second document, and any phrasing not yet in the pattern list. It is defence in depth.
+through a second document, and any phrasing not yet in the pattern list. It is defense in depth.
 
-The control against indirect injection is **PP-C001**, the authorisation gate, which does not
+The control against indirect injection is **PP-C001**, the authorization gate, which does not
 care what the model was persuaded of. If you take one thing from this repository, take that
 placement rather than the filter.
 
@@ -143,7 +143,7 @@ assessment-results JSON schema on every run (`node scripts/validate-oscal.mjs`).
 
 What that means: the document is structurally well-formed OSCAL. What it does not mean: that any
 particular consumer will accept it, that the `props` under the `proofplane` namespace mean
-anything to anyone else, or that the modelling choices are idiomatic. Schema validity is the
+anything to anyone else, or that the modeling choices are idiomatic. Schema validity is the
 floor, not the ceiling.
 
 Worth noting for anyone attempting the same: the OSCAL schema uses ECMA-262 regular expressions
@@ -184,7 +184,7 @@ nothing to look up.
 One agent, six tools, two tenants, one process, no delegation, no MCP servers, no multi-agent
 interaction, no persistence beyond memory. Real deployments differ in every one of those, and
 several of them — particularly agent-to-agent and MCP tool poisoning — are where the risk is
-currently moving. See "Not modelled" in [THREAT-MODEL.md](THREAT-MODEL.md).
+currently moving. See "Not modeled" in [THREAT-MODEL.md](THREAT-MODEL.md).
 
 ## Discovery is a static scanner, and it found its own false positives
 

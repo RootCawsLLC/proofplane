@@ -29,13 +29,13 @@ below follows from that one fact.
 `AML.T0051.001` · `ASI01`, `ASI02`
 
 The attacker writes a directive into a ticket body. A support agent asks the assistant to
-summarise open tickets. The directive enters context as retrieved data and the model acts on it.
+summarize open tickets. The directive enters context as retrieved data and the model acts on it.
 
 **Two controls, deliberately layered and deliberately separate:**
 
 - **PP-C002 (G2, sanitisation)** — strip tool-directed imperatives from untrusted spans before
-  they enter context. *Defence in depth.*
-- **PP-C001 (G1, authorisation)** — a privileged tool call produces no effect without an
+  they enter context. *Defense in depth.*
+- **PP-C001 (G1, authorization)** — a privileged tool call produces no effect without an
   approval record created outside the model's context. *This is the control.*
 
 **The load-bearing claim: prompt injection is not solvable at the input layer.** Content
@@ -55,14 +55,14 @@ An agent inherits the blast radius of its tools. A `lookup_account` that can see
 means one successful injection reads every tenant.
 
 **PP-C003 (G3)** resolves the caller's tenant from the session, never from model arguments.
-Ordinary application authorisation — included in the catalog specifically so it is not framed
+Ordinary application authorization — included in the catalog specifically so it is not framed
 as an exotic AI problem.
 
 ### 3. Sensitive data egress in the model's own answer
 
 `AML.T0057` · `ASI04`
 
-The assistant is given account records and summarises them, which is what assistants do. The
+The assistant is given account records and summarizes them, which is what assistants do. The
 system prompt says not to reveal card numbers. That instruction has an unknown failure rate.
 
 **PP-C004 (G4)** filters the response after the model. Its failure rate is measurable, which is
@@ -92,7 +92,7 @@ expires at some unknown point and no diff shows it.
 **PP-C006 (G6)** publishes a CycloneDX ML-BOM, requires a pinned identifier, and reconciles it
 against the live runtime.
 
-## Not modelled in Phase 0
+## Not modeled in Phase 0
 
 Named because an unnamed gap reads as a claim of coverage:
 

@@ -36,7 +36,7 @@ pipeline, and OSCAL export against a real model.
 
 - **Record/replay of real model responses.** Reproducible, and it would let the suite exercise
   real model text. Rejected because the cassettes go stale silently and a re-recorded cassette
-  looks the same in a diff as a real behavioural change.
+  looks the same in a diff as a real behavioral change.
 - **A small local model.** Still non-deterministic, adds a multi-gigabyte dependency, and shifts
   the question to "is this model representative", which is harder than the one being answered.
 - **Live model only.** Honest, and unreproducible by anyone without a key. Two of the three
@@ -54,6 +54,6 @@ result is scoped to.
 
 **Follow-on.** The double is a strawman in one specific sense: it complies with every injected
 directive it can parse, where a real model sometimes refuses. This makes it a *harder* target
-for the sanitisation guardrail (G2) and a *fair* one for the authorisation guardrail (G1), since
-G1 does not depend on model behaviour at all. That asymmetry is itself an argument for placing
-the control at the authorisation boundary.
+for the sanitisation guardrail (G2) and a *fair* one for the authorization guardrail (G1), since
+G1 does not depend on model behavior at all. That asymmetry is itself an argument for placing
+the control at the authorization boundary.

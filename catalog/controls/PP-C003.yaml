@@ -10,7 +10,7 @@ statement: >
 rationale: >
   An agent inherits the blast radius of its tools. If a tool can read every tenant, then a
   single successful injection reads every tenant. Tenant scoping is ordinary application
-  authorisation, but it is routinely omitted when tools are written for an LLM because the
+  authorization, but it is routinely omitted when tools are written for an LLM because the
   model "should only ask for the right thing". The model is not a trust boundary.
 
 threat:

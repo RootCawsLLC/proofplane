@@ -6,13 +6,13 @@ statement: >
   Any tool invocation that moves money, mutates a customer record, or sends an external
   communication must be gated by an approval decision that is created, stored, and evaluated
   outside the model's context window. The model may request such an action. It must not be
-  able to authorise one.
+  able to authorize one.
 
 rationale: >
   Prompt injection is not reliably solvable at the input layer. Any text that reaches the
   context window — including text an attacker wrote into a support ticket — can influence
   what the model asks for. The durable control is therefore not "stop the model asking" but
-  "make asking insufficient". Authorisation lives in deterministic code that has no notion of
+  "make asking insufficient". Authorization lives in deterministic code that has no notion of
   what the model said and cannot be argued with.
 
 threat:

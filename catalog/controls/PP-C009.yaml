@@ -3,7 +3,7 @@ title: An approval is single-use and executes only the arguments a human saw
 guardrail: G9
 
 statement: >
-  An approval record may be redeemed exactly once, and the action it authorises executes with
+  An approval record may be redeemed exactly once, and the action it authorizes executes with
   the arguments captured at request time. Arguments supplied at redemption are ignored.
 
 rationale: >
@@ -44,7 +44,7 @@ crosswalk:
     confidence: high
     basis: >
       Article 14 requires oversight to be effective, not merely present. An approval that can be
-      replayed or re-parameterised is present and not effective.
+      replayed or re-parameterized is present and not effective.
   - framework: ISO/IEC 42001:2023
     reference: A.9
     reference_kind: annex_a_group

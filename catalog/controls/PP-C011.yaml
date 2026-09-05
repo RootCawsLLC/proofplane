@@ -47,7 +47,7 @@ crosswalk:
     reference_kind: annex_a_group
     label: AI system lifecycle
     confidence: medium
-    basis: Annex A group level only. Verification and validation of AI system behaviour.
+    basis: Annex A group level only. Verification and validation of AI system behavior.
   - framework: NIST AI RMF 1.0
     reference: MEASURE-2.7
     reference_kind: subcategory

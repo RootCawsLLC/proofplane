@@ -4,7 +4,7 @@
 
 ## Context
 
-The operator exposes this assurance programme to an agent over MCP. That immediately raises the
+The operator exposes this assurance program to an agent over MCP. That immediately raises the
 question every agentic system has to answer and most answer in a README: what is the model
 allowed to decide?
 
@@ -64,7 +64,7 @@ deliberate and is the honest limit of this design.
 ## The self-referential part
 
 This is the same control as PP-C001. That control says a model may request a consequential action
-but must not authorise one, and the target is judged against it by an executed attack. It would
+but must not authorize one, and the target is judged against it by an executed attack. It would
 be difficult to take this repository seriously if it audited for that property and did not have
 it — so the operator is built the way the catalog says systems should be, and the proposal queue
 is shaped like the target's approval ledger on purpose.

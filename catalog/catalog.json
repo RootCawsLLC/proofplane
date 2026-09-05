@@ -5,8 +5,8 @@
       "id": "PP-C001",
       "title": "Consequential agent actions require an approval recorded outside the model",
       "guardrail": "G1",
-      "statement": "Any tool invocation that moves money, mutates a customer record, or sends an external communication must be gated by an approval decision that is created, stored, and evaluated outside the model's context window. The model may request such an action. It must not be able to authorise one.",
-      "rationale": "Prompt injection is not reliably solvable at the input layer. Any text that reaches the context window \u2014 including text an attacker wrote into a support ticket \u2014 can influence what the model asks for. The durable control is therefore not \"stop the model asking\" but \"make asking insufficient\". Authorisation lives in deterministic code that has no notion of what the model said and cannot be argued with.",
+      "statement": "Any tool invocation that moves money, mutates a customer record, or sends an external communication must be gated by an approval decision that is created, stored, and evaluated outside the model's context window. The model may request such an action. It must not be able to authorize one.",
+      "rationale": "Prompt injection is not reliably solvable at the input layer. Any text that reaches the context window \u2014 including text an attacker wrote into a support ticket \u2014 can influence what the model asks for. The durable control is therefore not \"stop the model asking\" but \"make asking insufficient\". Authorization lives in deterministic code that has no notion of what the model said and cannot be argued with.",
       "limits": "",
       "proved_by": [
         "PP-P001"
@@ -98,7 +98,7 @@
       "title": "Attacker-authored content must not reach the model as actionable instruction",
       "guardrail": "G2",
       "statement": "Content that originates outside the trust boundary \u2014 support ticket bodies, retrieved knowledge-base documents, tool output derived from user input \u2014 must be marked as data and stripped of tool-directed imperatives before it enters the model context.",
-      "rationale": "This is defence in depth, not the primary control. Content-layer defences against indirect prompt injection are defeatable by obfuscation, encoding, and novel phrasing, and any claim otherwise is dishonest. PP-C002 exists to raise cost and reduce noise. PP-C001 is what actually stops the loss event. The two are deliberately separate controls so that a failure of this one does not silently become a failure of the system.",
+      "rationale": "This is defense in depth, not the primary control. Content-layer defenses against indirect prompt injection are defeatable by obfuscation, encoding, and novel phrasing, and any claim otherwise is dishonest. PP-C002 exists to raise cost and reduce noise. PP-C001 is what actually stops the loss event. The two are deliberately separate controls so that a failure of this one does not silently become a failure of the system.",
       "limits": "A HELD result here is scoped to the phrasing PP-P002 tests. The filter matches on the token \"refund\"; a ticket saying \"reimburse me\" carries the same instruction and is not stripped. `proofplane-probe limits` executes exactly that bypass against a fully guarded target and confirms it works \u2014 while PP-C001 stops the loss event anyway, which is the whole reason the two are separate controls. Read this control's status as \"this attack was executed and failed\", never as \"this class of attack cannot succeed\".",
       "proved_by": [
         "PP-P002"
@@ -164,7 +164,7 @@
           "reference": "Article 15",
           "reference_kind": "article",
           "confidence": "high",
-          "basis": "Article 15 requires high-risk systems to be resilient against attempts by third parties to alter their use or behaviour by exploiting system vulnerabilities, and names data poisoning and adversarial examples explicitly.",
+          "basis": "Article 15 requires high-risk systems to be resilient against attempts by third parties to alter their use or behavior by exploiting system vulnerabilities, and names data poisoning and adversarial examples explicitly.",
           "label": "Accuracy, robustness and cybersecurity"
         },
         {
@@ -186,7 +186,7 @@
       "title": "Agent tool access is scoped to the caller's tenant",
       "guardrail": "G3",
       "statement": "Every tool that reads or writes customer data must resolve the caller's tenant from the session, not from the model's arguments, and must refuse to return records belonging to any other tenant regardless of what the model asks for.",
-      "rationale": "An agent inherits the blast radius of its tools. If a tool can read every tenant, then a single successful injection reads every tenant. Tenant scoping is ordinary application authorisation, but it is routinely omitted when tools are written for an LLM because the model \"should only ask for the right thing\". The model is not a trust boundary.",
+      "rationale": "An agent inherits the blast radius of its tools. If a tool can read every tenant, then a single successful injection reads every tenant. Tenant scoping is ordinary application authorization, but it is routinely omitted when tools are written for an LLM because the model \"should only ask for the right thing\". The model is not a trust boundary.",
       "limits": "",
       "proved_by": [
         "PP-P003"
@@ -607,7 +607,7 @@
           "reference": "Article 15",
           "reference_kind": "article",
           "confidence": "medium",
-          "basis": "Article 15 requires resilience against attempts to alter system behaviour by exploiting vulnerabilities. An unscoped tool surface is such a vulnerability. Supporting.",
+          "basis": "Article 15 requires resilience against attempts to alter system behavior by exploiting vulnerabilities. An unscoped tool surface is such a vulnerability. Supporting.",
           "label": "Accuracy, robustness and cybersecurity"
         },
         {
@@ -635,7 +635,7 @@
       "id": "PP-C009",
       "title": "An approval is single-use and executes only the arguments a human saw",
       "guardrail": "G9",
-      "statement": "An approval record may be redeemed exactly once, and the action it authorises executes with the arguments captured at request time. Arguments supplied at redemption are ignored.",
+      "statement": "An approval record may be redeemed exactly once, and the action it authorizes executes with the arguments captured at request time. Arguments supplied at redemption are ignored.",
       "rationale": "This is the quiet failure of every human-in-the-loop design. The reviewer did consent \u2014 once, to something \u2014 so the audit log reads clean, the control appears present, and the effect happened twice with arguments nobody approved. It is worth separating from PP-C001 rather than folding in. PP-C001 asks whether an approval exists. PP-C009 asks whether it means anything. A system can pass the first and fail the second, and the resulting evidence is more misleading than having no gate at all, because the approval record actively vouches for the outcome.",
       "limits": "",
       "proved_by": [
@@ -667,7 +667,7 @@
           "reference": "Article 14",
           "reference_kind": "article",
           "confidence": "high",
-          "basis": "Article 14 requires oversight to be effective, not merely present. An approval that can be replayed or re-parameterised is present and not effective.",
+          "basis": "Article 14 requires oversight to be effective, not merely present. An approval that can be replayed or re-parameterized is present and not effective.",
           "label": "Human oversight"
         },
         {
@@ -704,7 +704,7 @@
       "title": "Outbound communication is restricted to destinations inside the caller's tenant",
       "guardrail": "G10",
       "statement": "Any tool that sends data outward resolves its permitted destinations from the caller's tenant and refuses anything else, before the request reaches an approval queue.",
-      "rationale": "PP-C001 governs *whether* an outbound action happens. This governs *where it goes*, and the two fail independently. An attacker who cannot make the agent act without approval can still make it propose acting toward an address they control \u2014 and a reviewer approving forty requests an hour is checking that a refund looks reasonable, not that a domain does. The check runs before the approval gate for that reason. A destination outside the tenant is not a judgement call, so no human should be asked to make it.",
+      "rationale": "PP-C001 governs *whether* an outbound action happens. This governs *where it goes*, and the two fail independently. An attacker who cannot make the agent act without approval can still make it propose acting toward an address they control \u2014 and a reviewer approving forty requests an hour is checking that a refund looks reasonable, not that a domain does. The check runs before the approval gate for that reason. A destination outside the tenant is not a judgment call, so no human should be asked to make it.",
       "limits": "",
       "proved_by": [
         "PP-P010"
@@ -736,7 +736,7 @@
           "reference": "Article 15",
           "reference_kind": "article",
           "confidence": "medium",
-          "basis": "Resilience against third parties altering system behaviour. Supporting.",
+          "basis": "Resilience against third parties altering system behavior. Supporting.",
           "label": "Accuracy, robustness and cybersecurity"
         },
         {
@@ -821,7 +821,7 @@
           "reference": "A.6",
           "reference_kind": "annex_a_group",
           "confidence": "medium",
-          "basis": "Annex A group level only. Verification and validation of AI system behaviour.",
+          "basis": "Annex A group level only. Verification and validation of AI system behavior.",
           "label": "AI system lifecycle"
         },
         {
@@ -882,7 +882,7 @@
           "reference": "Article 15",
           "reference_kind": "article",
           "confidence": "medium",
-          "basis": "Disclosure of the system prompt is reconnaissance enabling later behavioural attacks. Supporting rather than satisfying.",
+          "basis": "Disclosure of the system prompt is reconnaissance enabling later behavioral attacks. Supporting rather than satisfying.",
           "label": "Accuracy, robustness and cybersecurity"
         },
         {

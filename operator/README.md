@@ -1,6 +1,6 @@
 # operator
 
-An MCP server that exposes the assurance programme to an agent, with a structural boundary
+An MCP server that exposes the assurance program to an agent, with a structural boundary
 between what a model may judge and what only deterministic code may decide.
 
 ```bash
@@ -80,7 +80,7 @@ canonical encoders agree byte for byte, and they did not: Python writes a float 
 round-trip float representation, both sort keys, compact separators are identical — and that
 single case was enough to make probe-written evidence unverifiable from here.
 
-Both sides now normalise integral floats to integers before hashing, and
+Both sides now normalize integral floats to integers before hashing, and
 `test/repo.test.ts` verifies a Python-written chain from TypeScript so the two cannot drift
 apart again. Had the operator simply shelled out to the Python verifier, the mismatch would still
 be there and "hash-chained evidence" would have been a word rather than a property.
@@ -91,7 +91,7 @@ The operator is itself an AI system governed by this platform. Adding it made
 `discover --fail-on-undeclared` fail until `@anthropic-ai/sdk` and `@modelcontextprotocol/sdk`
 were entered in `catalog/declared-ai.txt` — the inventory doing its job on the person who wrote
 it. Its proposal queue is shaped like the target's approval ledger for the same reason: PP-C001
-says a model may request a consequential action but must not authorise one, and it would be hard
+says a model may request a consequential action but must not authorize one, and it would be hard
 to take this repository seriously if it audited for that and did not have it.
 
 ## Limits
