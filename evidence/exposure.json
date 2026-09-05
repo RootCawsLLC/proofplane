@@ -5,7 +5,7 @@
   "seed": 20260810,
   "configuration": "guarded",
   "evidence": {
-    "run_id": "33833288388-guarded",
+    "run_id": "33941888022-guarded",
     "recorded_at": "2026-01-01T00:00:00Z",
     "head_hash": "4be0741385ee0afd0ac0435b4f7a5cf454d4d5e2ce5b58762378a36b4c58cbc9",
     "model": {
