@@ -44,7 +44,7 @@ crosswalk:
     label: Accuracy, robustness and cybersecurity
     confidence: medium
     basis: >
-      Disclosure of the system prompt is reconnaissance enabling later behavioural attacks.
+      Disclosure of the system prompt is reconnaissance enabling later behavioral attacks.
       Supporting rather than satisfying.
   - framework: ISO/IEC 42001:2023
     reference: A.6

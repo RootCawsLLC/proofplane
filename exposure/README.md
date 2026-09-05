@@ -1,7 +1,7 @@
 # exposure
 
 FAIR loss exposure bound to live control state. A guardrail that stops holding moves a dollar
-figure, not a colour.
+figure, not a color.
 
 ```bash
 npm ci && npm run build
@@ -140,7 +140,7 @@ The full account is in [../docs/HONEST-LIMITS.md](../docs/HONEST-LIMITS.md). Bri
   its face.
 
 Replace every number in `scenarios.json` with calibrated estimates before any output means
-anything about your organisation. This is a structure for your numbers, not a source of them.
+anything about your organization. This is a structure for your numbers, not a source of them.
 
 ## A guard that was wrong
 

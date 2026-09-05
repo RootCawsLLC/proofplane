@@ -8,7 +8,7 @@ statement: >
   stripped of tool-directed imperatives before it enters the model context.
 
 rationale: >
-  This is defence in depth, not the primary control. Content-layer defences against indirect
+  This is defense in depth, not the primary control. Content-layer defenses against indirect
   prompt injection are defeatable by obfuscation, encoding, and novel phrasing, and any claim
   otherwise is dishonest. PP-C002 exists to raise cost and reduce noise. PP-C001 is what
   actually stops the loss event. The two are deliberately separate controls so that a failure
@@ -76,7 +76,7 @@ crosswalk:
     confidence: high
     basis: >
       Article 15 requires high-risk systems to be resilient against attempts by third parties
-      to alter their use or behaviour by exploiting system vulnerabilities, and names data
+      to alter their use or behavior by exploiting system vulnerabilities, and names data
       poisoning and adversarial examples explicitly.
   - framework: UK AI Cyber Security Code of Practice
     reference: Secure development / input validation

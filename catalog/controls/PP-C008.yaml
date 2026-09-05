@@ -55,7 +55,7 @@ crosswalk:
     label: Accuracy, robustness and cybersecurity
     confidence: medium
     basis: >
-      Article 15 requires resilience against attempts to alter system behaviour by exploiting
+      Article 15 requires resilience against attempts to alter system behavior by exploiting
       vulnerabilities. An unscoped tool surface is such a vulnerability. Supporting.
   - framework: AIUC-1
     reference: Security

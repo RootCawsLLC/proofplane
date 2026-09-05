@@ -96,7 +96,7 @@
           "name": "NetDiligence Cyber Claims Study 2025 (Fifteenth Annual)",
           "url": "https://netdiligence.com/cyber-claims-study-2025-report/",
           "confidence": "medium",
-          "limitation": "A single observed claim, not a modelled percentile - it is the maximum of 579 claims over five years, so it says nothing about how much worse a loss could be, and a larger sample would likely show a larger maximum. Insured-claim basis, so it is censored by policy limits and excludes uninsured or unreported losses. The SME band spans revenue up to USD 2B. Nominal 2020-2024 dollars, not inflation-adjusted."
+          "limitation": "A single observed claim, not a modeled percentile - it is the maximum of 579 claims over five years, so it says nothing about how much worse a loss could be, and a larger sample would likely show a larger maximum. Insured-claim basis, so it is censored by policy limits and excludes uninsured or unreported losses. The SME band spans revenue up to USD 2B. Nominal 2020-2024 dollars, not inflation-adjusted."
         }
       ]
     }

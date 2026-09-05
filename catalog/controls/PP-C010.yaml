@@ -12,7 +12,7 @@ rationale: >
   make it propose acting toward an address they control — and a reviewer approving forty
   requests an hour is checking that a refund looks reasonable, not that a domain does.
   The check runs before the approval gate for that reason. A destination outside the tenant is
-  not a judgement call, so no human should be asked to make it.
+  not a judgment call, so no human should be asked to make it.
 
 threat:
   atlas:
@@ -40,7 +40,7 @@ crosswalk:
     reference_kind: article
     label: Accuracy, robustness and cybersecurity
     confidence: medium
-    basis: Resilience against third parties altering system behaviour. Supporting.
+    basis: Resilience against third parties altering system behavior. Supporting.
   - framework: GDPR
     reference: Article 32
     reference_kind: article

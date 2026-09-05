@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>proofplane — how to prove an AI control</title>
-<meta name="description" content="An AI governance control plane. A control is held only when an executed adversarial attack failed. How to run it, when to use it, and how to take the pattern into your organisation.">
+<meta name="description" content="An AI governance control plane. A control is held only when an executed adversarial attack failed. How to run it, when to use it, and how to take the pattern into your organization.">
 <style>
 :root{
   --bg:#FAFAF8;--panel:#FFFFFF;--panel-2:#F5F1E8;--border:#e0e0e0;
@@ -69,7 +69,7 @@ footer a{color:var(--accent)}
 <h1>proofplane</h1>
 <p class="thesis">An AI governance control plane where a control is satisfied
 <b>only when an executed adversarial attack failed</b> — never because a document says it exists.
-This page is how you use it, and how you take the same rule into your own programme.</p>
+This page is how you use it, and how you take the same rule into your own program.</p>
 
 <a href="https://brmuyw6npp.us-east-2.awsapprunner.com" style="display:flex;align-items:center;gap:.85rem;margin:0 0 1.75rem;padding:.85rem 1.05rem;background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:10px;text-decoration:none">
   <span aria-hidden="true" style="font-size:1.3rem;line-height:1;color:var(--accent)">&#9654;</span>
@@ -109,7 +109,7 @@ This page is how you use it, and how you take the same rule into your own progra
     <ul>
       <li>You need to certify a live model as safe. The default target is a deterministic double. A held result is evidence the <i>guardrail</i> works.</li>
       <li>The control is governance, training, or a contract. Those resist automated attack and are absent here on purpose — not passing.</li>
-      <li>You want a coverage percentage. Twelve controls is a worked example, not an AIUC-1 or ISO 42001 programme.</li>
+      <li>You want a coverage percentage. Twelve controls is a worked example, not an AIUC-1 or ISO 42001 program.</li>
     </ul>
   </div>
 </div>
@@ -135,14 +135,14 @@ node scripts/validate-oscal.mjs</pre>
   PROOFPLANE_GUARDRAILS=all node target/dist/server.js</pre>
 <p>Raise the trial count and read the breach <i>rate</i>. Zero breaches in three trials is consistent with a true failure rate above 50%. That is why every result on this site shows its trial count.</p>
 
-<h2 id="org">Take it into your organisation</h2>
+<h2 id="org">Take it into your organization</h2>
 <p>You do not drop this repository onto a production agent and call it a day. You take the <b>rule</b> and the <b>shape</b>.</p>
 <ol>
   <li><b>Write the control as an assertion a probe can fail.</b> “Privileged actions require an approval recorded outside the model” can be attacked. “We take AI risk seriously” cannot. If you cannot name the attack, you do not have a technical control yet.</li>
   <li><b>Put the guardrail in deterministic code, not in the prompt.</b> The model is not a trust boundary. Every guardrail in the target is toggleable code outside the model. That is the whole architectural argument.</li>
   <li><b>Prove the probe can go red</b> before you trust it going green. The independence matrix is the worked example: disable the control under test, confirm breach; disable every other control, confirm hold.</li>
   <li><b>Emit what an assessor already knows how to read.</b> OSCAL assessment results with method TEST. A BOM that points at a file and a line. A head hash you can put somewhere you cannot silently edit.</li>
-  <li><b>Price the control against the evidence, not the catalogue.</b> The exposure report credits a control only if a probe attacked it and failed. When a guardrail stops holding, the dollar figure moves on the next run.</li>
+  <li><b>Price the control against the evidence, not the catalog.</b> The exposure report credits a control only if a probe attacked it and failed. When a guardrail stops holding, the dollar figure moves on the next run.</li>
 </ol>
 <p>Start with one agent, one privileged tool, one approval gate. Port PP-C001 and its probe. Do not start by mapping ISO 42001 — the crosswalk here is cited at group level, with a confidence on every edge, and it is not a claim of satisfaction.</p>
 <p>Full write-up, ADRs, and the threat model live in the repository. This page is the operator’s entrance.</p>

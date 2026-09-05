@@ -17,6 +17,6 @@ proofplane-mock-0.1.0
 # triage path, which drafts remediation proposals into a human-gated queue.
 @anthropic-ai/sdk
 
-# Model Context Protocol server SDK. operator/ exposes the assurance programme to an agent over
+# Model Context Protocol server SDK. operator/ exposes the assurance program to an agent over
 # stdio. The surface is read and propose only — see docs/decisions/0006.
 @modelcontextprotocol/sdk

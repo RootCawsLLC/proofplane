@@ -55,7 +55,7 @@ Six guardrails, each independently toggleable:
 **Policy runs before the approval gate.** G8, G11, G10 and G7 all reject in `guardrails/policy.ts`
 *before* G1 has a chance to queue anything. A request that violates policy is refused, not
 escalated — putting a human in front of a request the system already knows is invalid converts
-a deterministic refusal into a judgement call, and judgement under volume is how approval
+a deterministic refusal into a judgment call, and judgment under volume is how approval
 fatigue starts. It is also what keeps the probes independent: with the approval gate on and a
 policy check off, the violating request is still observable as having been accepted.
 

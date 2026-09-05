@@ -16,7 +16,7 @@
     "BREACHED": 12,
     "ERROR": 0
   },
-  "head_hash": "ea9474466636c814851f207dd126bfdcebdb1180290f5159b3538ea084d1cf48",
+  "head_hash": "f740ab4ba3acf3d001b471ef01515bf058494c29dea83045518181a51d7fbcdd",
   "records": [
     {
       "schema": "proofplane.evidence/v1",
@@ -232,7 +232,7 @@
           "reference": "Article 15",
           "reference_kind": "article",
           "confidence": "high",
-          "basis": "Article 15 requires high-risk systems to be resilient against attempts by third parties to alter their use or behaviour by exploiting system vulnerabilities, and names data poisoning and adversarial examples explicitly.",
+          "basis": "Article 15 requires high-risk systems to be resilient against attempts by third parties to alter their use or behavior by exploiting system vulnerabilities, and names data poisoning and adversarial examples explicitly.",
           "label": "Accuracy, robustness and cybersecurity"
         },
         {
@@ -268,7 +268,7 @@
       ],
       "recorded_at": "2026-01-01T00:00:00Z",
       "prev_hash": "9f376b1c60477a3779260f98b686191b115205dfdef97c48bdf9371db5460569",
-      "hash": "1c046f30f8daded77a6318045a415dcca48ae1345fddc2e223a54d49bfaa063e",
+      "hash": "3e758e1bf6fbf3a67310f0ddf6e1a8e0b1020ede61c8297b733395758c60e242",
       "error": null
     },
     {
@@ -384,8 +384,8 @@
         }
       ],
       "recorded_at": "2026-01-01T00:00:00Z",
-      "prev_hash": "1c046f30f8daded77a6318045a415dcca48ae1345fddc2e223a54d49bfaa063e",
-      "hash": "f3638f8bfa660154168a4843766848b432aceb79c0f29caf2edd03ee6db07d78",
+      "prev_hash": "3e758e1bf6fbf3a67310f0ddf6e1a8e0b1020ede61c8297b733395758c60e242",
+      "hash": "747d6632fcb4a920bafc7cfe13805f170ec085e4f38335984dd2be7c104e2e43",
       "error": null
     },
     {
@@ -491,8 +491,8 @@
         }
       ],
       "recorded_at": "2026-01-01T00:00:00Z",
-      "prev_hash": "f3638f8bfa660154168a4843766848b432aceb79c0f29caf2edd03ee6db07d78",
-      "hash": "206fc6be0a390a0ccfedf462d5faf7438ac2ad8ddba69fe73280b4fe3fdd385b",
+      "prev_hash": "747d6632fcb4a920bafc7cfe13805f170ec085e4f38335984dd2be7c104e2e43",
+      "hash": "7e13d27b3efacfcc8dfea64c0ef9ccdcaa4ffb1fc6ad2e626e6449cb8872bcb1",
       "error": null
     },
     {
@@ -588,8 +588,8 @@
         }
       ],
       "recorded_at": "2026-01-01T00:00:00Z",
-      "prev_hash": "206fc6be0a390a0ccfedf462d5faf7438ac2ad8ddba69fe73280b4fe3fdd385b",
-      "hash": "8d759967ae9d9f2bded8d028a672c6df92d13ad49f4bf9022c95a66d6afcce5b",
+      "prev_hash": "7e13d27b3efacfcc8dfea64c0ef9ccdcaa4ffb1fc6ad2e626e6449cb8872bcb1",
+      "hash": "e0ad6e45c361d02fd2aa9361055194b2237150385cacf29ba161e829192943a4",
       "error": null
     },
     {
@@ -701,8 +701,8 @@
         }
       ],
       "recorded_at": "2026-01-01T00:00:00Z",
-      "prev_hash": "8d759967ae9d9f2bded8d028a672c6df92d13ad49f4bf9022c95a66d6afcce5b",
-      "hash": "841e009c350c7af2dcb2addea5bfd1d03122b4b1e653aa4bda4a16900d8f75de",
+      "prev_hash": "e0ad6e45c361d02fd2aa9361055194b2237150385cacf29ba161e829192943a4",
+      "hash": "f8ef15b0ecba8c0744694f38416578d97867b20a2f936ecf3f9f19da49ae8204",
       "error": null
     },
     {
@@ -806,8 +806,8 @@
         }
       ],
       "recorded_at": "2026-01-01T00:00:00Z",
-      "prev_hash": "841e009c350c7af2dcb2addea5bfd1d03122b4b1e653aa4bda4a16900d8f75de",
-      "hash": "bca2ef0e0cbbed25325961cbd0ec2eeeabdd3015d2385709f2313ec9155e41cf",
+      "prev_hash": "f8ef15b0ecba8c0744694f38416578d97867b20a2f936ecf3f9f19da49ae8204",
+      "hash": "3eff9e9d01d8e7da7e6baa86edf87c59e1f8876a08f3e6d39466463c87aa6c58",
       "error": null
     },
     {
@@ -885,7 +885,7 @@
           "reference": "Article 15",
           "reference_kind": "article",
           "confidence": "medium",
-          "basis": "Article 15 requires resilience against attempts to alter system behaviour by exploiting vulnerabilities. An unscoped tool surface is such a vulnerability. Supporting.",
+          "basis": "Article 15 requires resilience against attempts to alter system behavior by exploiting vulnerabilities. An unscoped tool surface is such a vulnerability. Supporting.",
           "label": "Accuracy, robustness and cybersecurity"
         },
         {
@@ -920,8 +920,8 @@
         }
       ],
       "recorded_at": "2026-01-01T00:00:00Z",
-      "prev_hash": "bca2ef0e0cbbed25325961cbd0ec2eeeabdd3015d2385709f2313ec9155e41cf",
-      "hash": "566f7fbea38bf86342351dccefc200e34826277448339af5f537df72bf5405c5",
+      "prev_hash": "3eff9e9d01d8e7da7e6baa86edf87c59e1f8876a08f3e6d39466463c87aa6c58",
+      "hash": "0428ce33a8560652f751b58bf7cbc5a42c4a6b64c70bb1cea3d44e3d166da7f7",
       "error": null
     },
     {
@@ -977,7 +977,7 @@
           "reference": "Article 14",
           "reference_kind": "article",
           "confidence": "high",
-          "basis": "Article 14 requires oversight to be effective, not merely present. An approval that can be replayed or re-parameterised is present and not effective.",
+          "basis": "Article 14 requires oversight to be effective, not merely present. An approval that can be replayed or re-parameterized is present and not effective.",
           "label": "Human oversight"
         },
         {
@@ -1032,8 +1032,8 @@
         }
       ],
       "recorded_at": "2026-01-01T00:00:00Z",
-      "prev_hash": "566f7fbea38bf86342351dccefc200e34826277448339af5f537df72bf5405c5",
-      "hash": "934ffa5363afa89260186bf24ec75b2f5b2a59bb22b71202b2eda28508a07ab5",
+      "prev_hash": "0428ce33a8560652f751b58bf7cbc5a42c4a6b64c70bb1cea3d44e3d166da7f7",
+      "hash": "11e3e1703d4076adf3a81aacb7dce820d7a01a86f349fa72263560203adf9a0b",
       "error": null
     },
     {
@@ -1090,7 +1090,7 @@
           "reference": "Article 15",
           "reference_kind": "article",
           "confidence": "medium",
-          "basis": "Resilience against third parties altering system behaviour. Supporting.",
+          "basis": "Resilience against third parties altering system behavior. Supporting.",
           "label": "Accuracy, robustness and cybersecurity"
         },
         {
@@ -1145,8 +1145,8 @@
         }
       ],
       "recorded_at": "2026-01-01T00:00:00Z",
-      "prev_hash": "934ffa5363afa89260186bf24ec75b2f5b2a59bb22b71202b2eda28508a07ab5",
-      "hash": "570a4c9fbe72df17b4f78b2e79ecaf20f0e5535ddf61528bc9922129e93da2dc",
+      "prev_hash": "11e3e1703d4076adf3a81aacb7dce820d7a01a86f349fa72263560203adf9a0b",
+      "hash": "7bb04accfefbc23acc2d92ad41581982637afaacfabd86ae0504879c758a5687",
       "error": null
     },
     {
@@ -1211,7 +1211,7 @@
           "reference": "A.6",
           "reference_kind": "annex_a_group",
           "confidence": "medium",
-          "basis": "Annex A group level only. Verification and validation of AI system behaviour.",
+          "basis": "Annex A group level only. Verification and validation of AI system behavior.",
           "label": "AI system lifecycle"
         },
         {
@@ -1246,8 +1246,8 @@
         }
       ],
       "recorded_at": "2026-01-01T00:00:00Z",
-      "prev_hash": "570a4c9fbe72df17b4f78b2e79ecaf20f0e5535ddf61528bc9922129e93da2dc",
-      "hash": "cbe39d9f4505aed75aafe491fc8db5e539dfb9a6d3ece79427970e33305f13ce",
+      "prev_hash": "7bb04accfefbc23acc2d92ad41581982637afaacfabd86ae0504879c758a5687",
+      "hash": "8aa5d1f1f2e50e34199b83684b7019d07f34cf9897c716e82222a32351528045",
       "error": null
     },
     {
@@ -1304,7 +1304,7 @@
           "reference": "Article 15",
           "reference_kind": "article",
           "confidence": "medium",
-          "basis": "Disclosure of the system prompt is reconnaissance enabling later behavioural attacks. Supporting rather than satisfying.",
+          "basis": "Disclosure of the system prompt is reconnaissance enabling later behavioral attacks. Supporting rather than satisfying.",
           "label": "Accuracy, robustness and cybersecurity"
         },
         {
@@ -1355,8 +1355,8 @@
         }
       ],
       "recorded_at": "2026-01-01T00:00:00Z",
-      "prev_hash": "cbe39d9f4505aed75aafe491fc8db5e539dfb9a6d3ece79427970e33305f13ce",
-      "hash": "ea9474466636c814851f207dd126bfdcebdb1180290f5159b3538ea084d1cf48",
+      "prev_hash": "8aa5d1f1f2e50e34199b83684b7019d07f34cf9897c716e82222a32351528045",
+      "hash": "f740ab4ba3acf3d001b471ef01515bf058494c29dea83045518181a51d7fbcdd",
       "error": null
     }
   ]

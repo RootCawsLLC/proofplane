@@ -40,7 +40,7 @@ Standing rules that follow:
   cited at their natural precision, with the basis noting whether the mapping *satisfies* or
   merely *supports*.
 
-The HTML report renders confidence per mapping, colour-coded. A reader sees the uncertainty
+The HTML report renders confidence per mapping, color-coded. A reader sees the uncertainty
 without opening a YAML file.
 
 ## Consequences
@@ -74,7 +74,7 @@ The check earns its place anyway: invented and mistyped clause numbers are endem
 crosswalks and essentially nobody checks them. It is a spell-check for citations, which is a
 modest thing to be, and being clear about that is the point.
 
-It also surfaced a real modelling detail. ISO 27001 Annex A control numbers are ISO 27002
+It also surfaced a real modeling detail. ISO 27001 Annex A control numbers are ISO 27002
 control numbers, and SCF's ISO 27001 crosswalk carries main-body clauses only. Resolving `A.8.12`
 against the ISO 27001 crosswalk returns nothing — a false negative that looks like rigour.
 Annex A citations resolve against `general-iso-27002-2022` and nowhere else.
